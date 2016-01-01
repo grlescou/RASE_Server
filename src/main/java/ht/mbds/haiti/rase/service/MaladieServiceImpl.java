@@ -22,21 +22,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MaladieServiceImpl implements MaladieService {
 
-    @Autowired private MaladieRepository maladieRepositry;
+    @Autowired private MaladieRepository maladieRepository;
     
     @Override
-    public Maladie findMaladieById(long id) {
-      return maladieRepositry.findOne(id);
+    public Maladie findMaladieById(String id) {
+      return maladieRepository.findOne(id);
     }
 
     @Override
     public Maladie findMaladieByNom(String nom) {
-        return maladieRepositry.findByNom(nom);
+        return maladieRepository.findByNom(nom);
     }
 
     @Override
     public List<Maladie> findMaladieAll() {
-       return maladieRepositry.findAll();
+       return maladieRepository.findAll();
+    }
+
+    @Override
+    public Maladie saveMaladie(Maladie maladie) {
+       return maladieRepository.save(maladie);
+    }
+
+    @Override
+    public void deleteMaladie(Maladie maladie) {
+       maladieRepository.delete(maladie);
+    }
+
+    @Override
+    public void deleteMaladie(String id) {
+       maladieRepository.delete(id);
     }
     
 }

@@ -5,9 +5,13 @@
  */
 package ht.mbds.haiti.rase.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 
 /**
  *
@@ -17,7 +21,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Profession implements Serializable 
 {
     @Id 
-    private String _id;
+    private String id;
     private String nom;
     private String description;
 
@@ -26,28 +30,33 @@ public class Profession implements Serializable
     public Profession() {
     }
 
-    public Profession(String _id, String nom, String description) {
-        this._id = _id;
+    /*
+    public Profession(String id, String nom, String description) {
+        this.id = id;
+        this.description = description;
+        this.nom = nom;
+    }
+*/
+    @JsonCreator
+    public Profession(@JsonProperty("nom") String nom, @JsonProperty("description") String description) {
         this.description = description;
         this.nom = nom;
     }
 
-    public Profession( String nom,String description) {
-        this.description = description;
-        this.nom = nom;
+    @JsonIgnore
+    public boolean isNew() {
+        return id == null;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     
-    public String get_id ()
-    {
-        return _id;
-    }
-
-    public void set_id (String _id)
-    {
-        this._id = _id;
-    }
-
+   
     public String getDescription ()
     {
         return description;
@@ -71,6 +80,6 @@ public class Profession implements Serializable
     @Override
     public String toString()
     {
-        return "Profession [_id = "+_id+", description = "+description+", nom = "+nom+"]";
+        return "Profession [_id = "+id+", description = "+description+", nom = "+nom+"]";
     }
 }

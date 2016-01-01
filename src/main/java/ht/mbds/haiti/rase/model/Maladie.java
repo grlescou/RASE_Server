@@ -5,6 +5,9 @@
  */
 package ht.mbds.haiti.rase.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,20 +20,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Maladie implements Serializable 
 {
     @Id
-    private Long id;
+    private String id;
     private String nom;
     private String description;
     private int  seuil ;
     
     public Maladie() {
     }
-
-    public Maladie(String nom, String description, int seuil) {
+    @JsonCreator
+    public Maladie(@JsonProperty("nom") String nom, @JsonProperty("description") String description, @JsonProperty("seuil") int seuil) {
         this.nom = nom;
         this.description = description;
         this.seuil = seuil;
     }
-
+    
+/*
     public Maladie(long _id, String nom, String description, int seuil) {
         this.id = _id;
         this.nom = nom;
@@ -38,13 +42,20 @@ public class Maladie implements Serializable
         this.seuil = seuil;
     }
 
-   
+   */
 
-    public long getId() {
+    
+    @JsonIgnore
+    public boolean isNew() {
+        return id == null;
+    }
+
+    
+    public String getId() {
         return id;
     }
 
-    public void setId(long _id) {
+    public void setId(String _id) {
         this.id = _id;
     }
 
@@ -79,7 +90,7 @@ public class Maladie implements Serializable
 
     @Override
     public String toString() {
-        return "Maladie{" + "_id=" + id + ", nom=" + nom + ", description=" + description + ", seuil=" + seuil + '}';
+        return "Maladie{" + "id=" + id + ", nom=" + nom + ", description=" + description + ", seuil=" + seuil + '}';
     }
 
     

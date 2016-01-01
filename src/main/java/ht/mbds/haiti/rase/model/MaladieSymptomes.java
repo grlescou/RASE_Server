@@ -10,6 +10,10 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author MyPC
@@ -18,13 +22,23 @@ import org.springframework.data.annotation.Id;
 public class MaladieSymptomes implements Serializable 
 {   
     @Id
-    private long _id;
+    private String id;
      
     private Maladie maladie;
 
     private List<Symptome> symptomes;
 
-   
+    @JsonCreator
+    public MaladieSymptomes(@JsonProperty("maladie") Maladie maladie, @JsonProperty("symptomes")  List<Symptome> symptomes) {
+        this.maladie = maladie;
+        this.symptomes = symptomes;
+    }
+
+    @JsonIgnore
+    public boolean isNew() {
+        return id == null;
+    }
+    
 
     public Maladie getMaladie ()
     {
@@ -46,12 +60,12 @@ public class MaladieSymptomes implements Serializable
         this.symptomes = symptomes;
     }
 
-    public long getId() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void setId(long _id) {
-        this._id = _id;
+    public void setId(String _id) {
+        this.id = _id;
     }
 
 
@@ -59,7 +73,7 @@ public class MaladieSymptomes implements Serializable
     @Override
     public String toString()
     {
-        return "Maladie [Maladie = "+maladie+", symptome = "+symptomes.toString()+", _id = "+_id+"]";
+        return "Maladie [Maladie = "+maladie+", symptome = "+symptomes.toString()+", _id = "+id+"]";
     }
 }
 		

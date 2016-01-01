@@ -5,6 +5,9 @@
  */
 package ht.mbds.haiti.rase.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,123 +24,128 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CasMaladie  implements Serializable 
 {
     @Id
-    private String _id;
+    private String id;
     
-    private Maladie Maladie;
+    private Maladie maladie;
     
-    private List<Symptome> ListeSymptome;
+    private List<Symptome> listeSymptome;
     
-    private User User;
+    private User user;
  
-    private String Date;
+    private String date;
 
-    private GeoJsonPoint Location;
+    private List<Double> location;
 
    
-    private int Note;
+    private int note;
 
-    private Zone Zone;
+    private Zone zone;
 
     public CasMaladie() {
     }
-
-    public CasMaladie(Maladie Maladie, List<Symptome> ListeSymptome, User User, String Date, GeoJsonPoint Location, int Note, Zone Zone) {
-        this.Maladie = Maladie;
-        this.ListeSymptome = ListeSymptome;
-        this.User = User;
-        this.Date = Date;
-        this.Location = Location;
-        this.Note = Note;
-        this.Zone = Zone;
+    
+    @JsonCreator
+    public CasMaladie( @JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  User user, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("zone") Zone zone) {
+        this.maladie = maladie;
+        this.listeSymptome = listeSymptome;
+        this.user = user;
+        this.date = date;
+        this.location = location;
+        this.note = note;
+        this.zone = zone;
     }
     
     
-    
+     @JsonIgnore
+    public boolean isNew() {
+        return id == null;
+    }
     
 
     public User getUser ()
     {
-        return User;
+        return user;
     }
 
     public void setUser (User User)
     {
-        this.User = User;
+        this.user = User;
     }
 
     public Maladie getMaladie ()
     {
-        return Maladie;
+        return maladie;
     }
 
     public void setMaladie (Maladie Maladie)
     {
-        this.Maladie = Maladie;
+        this.maladie = Maladie;
     }
 
-    public String get_id ()
-    {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id (String _id)
-    {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
+
+   
+   
 
     public String getDate ()
     {
-        return Date;
+        return date;
     }
 
     public void setDate (String Date)
     {
-        this.Date = Date;
+        this.date = Date;
     }
 
-    public GeoJsonPoint getLocation ()
-    {
-        return Location;
+    public List<Double> getLocation() {
+        return location;
     }
 
-    public void setLocation (GeoJsonPoint Location)
-    {
-        this.Location = Location;
+    public void setLocation(List<Double> Location) {
+        this.location = Location;
     }
+
+   
 
     public List<Symptome> getListeSymptome ()
     {
-        return ListeSymptome;
+        return listeSymptome;
     }
 
     public void setListeSymptome (List<Symptome> ListeSymptome)
     {
-        this.ListeSymptome = ListeSymptome;
+        this.listeSymptome = ListeSymptome;
     }
 
     public int getNote ()
     {
-        return Note;
+        return note;
     }
 
     public void setNote (int Note)
     {
-        this.Note = Note;
+        this.note = Note;
     }
 
     public Zone getZone ()
     {
-        return Zone;
+        return zone;
     }
 
     public void setZone (Zone Zone)
     {
-        this.Zone = Zone;
+        this.zone = Zone;
     }
 
     @Override
     public String toString()
     {
-        return "CasMaladie [User = "+User+", Maladie = "+Maladie+", _id = "+_id+", Date = "+Date+", Location = "+Location+", Symptome = "+ListeSymptome+", Note = "+Note+", Zone = "+Zone+"]";
+        return "CasMaladie [User = "+user+", Maladie = "+maladie+", _id = "+id+", Date = "+date+", Location = "+location+", Symptome = "+listeSymptome+", Note = "+note+", Zone = "+zone+"]";
     }
 }

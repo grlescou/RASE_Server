@@ -10,6 +10,13 @@ import java.io.Serializable;
 import org.springframework.data.mongodb.core.geo.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
+import java.util.List;
+import org.springframework.data.geo.Point;
 /**
  *
  * @author MyPC
@@ -18,55 +25,55 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User  implements Serializable 
 {
     @Id
-    private String _id;
+    private String id;
     private String prenom;
     private String nom;
     private String mail;
     private String password;
-    private Profession Profession;
+    private Profession profession;
     //private String Telephone ;
     // private Adresse adresse ;
-    private GeoJsonPoint DernierLocation;
+    private List<Double> dernierLocation;
     private boolean actif;
     private String ip;
     private boolean valider ;
     
     public User() {
     }
-
-    public User(String prenom, String nom, String mail, String password, Profession Profession, boolean actif) {
+    
+     @JsonCreator
+    public User(@JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("profession") Profession profession, @JsonProperty("dernierLocation")   List<Double> dernierLocation, @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("valider") boolean valider) {
         this.prenom = prenom;
         this.nom = nom;
         this.mail = mail;
         this.password = password;
-        this.Profession = Profession;
-        this.actif = actif;
-        this.valider = false;
-    }
-
-    public User(String _id, String prenom, String nom, String mail, String password, Profession Profession, GeoJsonPoint DernierLocation, boolean actif, String ip, boolean valider) {
-        this._id = _id;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.mail = mail;
-        this.password = password;
-        this.Profession = Profession;
-        this.DernierLocation = DernierLocation;
+        this.profession = profession;
+        this.dernierLocation = dernierLocation;
         this.actif = actif;
         this.ip = ip;
         this.valider = valider;
     }
-
+/*
+    public User(String _id, String prenom, String nom, String mail, String password, Profession profession, GeoJsonPoint DernierLocation, boolean actif, String ip, boolean valider) {
+        this.id = _id;
+        this.prenom = prenom;
+        this.nom = nom;
+        this.mail = mail;
+        this.password = password;
+        this.profession = profession;
+        this.DernierLocation = dernierLocation;
+        this.actif = actif;
+        this.ip = ip;
+        this.valider = valider;
+    }
+*/
  
-    
-    
-    
-    
-    
-    
+    @JsonIgnore
+    public boolean isNew() {
+        return id == null;
+    }
 
-   
-    
+     
     public String getPrenom ()
     {
         return prenom;
@@ -97,45 +104,55 @@ public class User  implements Serializable
         this.mail = mail;
     }
 
-    public String get_id ()
-    {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id (String _id)
-    {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
+
+   
+
+    public boolean isValider() {
+        return valider;
+    }
+
+    public void setValider(boolean valider) {
+        this.valider = valider;
+    }
+
+   
 
     public Profession getProfession ()
     {
-        return Profession;
+        return profession;
     }
 
-    public void setProfession (Profession Profession)
+    public void setProfession (Profession profession)
     {
-        this.Profession = Profession;
+        this.profession = profession;
     }
 
-    public GeoJsonPoint getDernierLocation ()
-    {
-        return DernierLocation;
+    public List<Double> getDernierLocation() {
+        return dernierLocation;
     }
 
-    public void setDernierLocation (GeoJsonPoint DernierLocation)
-    {
-        this.DernierLocation = DernierLocation;
+    public void setDernierLocation(List<Double> dernierLocation) {
+        this.dernierLocation = dernierLocation;
     }
 
-    public boolean getActif ()
-    {
+
+
+    public boolean isActif() {
         return actif;
     }
 
-    public void setActif (boolean actif)
-    {
+    public void setActif(boolean actif) {
         this.actif = actif;
     }
+
+  
 
     public String getNom ()
     {
@@ -158,9 +175,10 @@ public class User  implements Serializable
     }
 
     @Override
-    public String toString()
-    {
-        return "User [prenom = "+prenom+", mail = "+mail+", _id = "+_id+", Profession = "+Profession+", DernierLocation = "+DernierLocation+", actif = "+actif+", nom = "+nom+", ip = "+ip+"]";
+    public String toString() {
+        return "User{" + "id=" + id + ", prenom=" + prenom + ", nom=" + nom + ", mail=" + mail + ", password=" + password + ", Profession=" + profession + ", DernierLocation=" + dernierLocation + ", actif=" + actif + ", ip=" + ip + ", valider=" + valider + '}';
     }
+
+
 }
 	

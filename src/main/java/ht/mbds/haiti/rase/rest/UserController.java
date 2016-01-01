@@ -5,64 +5,65 @@
  */
 package ht.mbds.haiti.rase.rest;
 
-/**
- *
- * @author MyPC
- */
-
-import ht.mbds.haiti.rase.model.Maladie;
-import ht.mbds.haiti.rase.service.MaladieService;
+import ht.mbds.haiti.rase.model.User;
+import ht.mbds.haiti.rase.service.UserService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ *
+ * @author MyPC
+ */
 
 @RestController
-@RequestMapping(value="/v1/maladie")
-public class MaladieController {
+@RequestMapping(value="/v1/user")
+public class UserController {
     
-    @Autowired private MaladieService maladieService;
+    
+    @Autowired private UserService userService;
     
     @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
-    public Maladie[] getMaladieArray() {
-        return maladieService.findMaladieAll().toArray(new Maladie[]{});
+    public User[] getUserArray() {
+        return userService.findUserAll().toArray(new User[]{});
     }
     
      @RequestMapping(value="/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Maladie getMaladieById(@PathVariable("Id") String Id) {     
-        Maladie maladie = maladieService.findMaladieById(Id) ;
-        return maladie;
+    public User getUserById(@PathVariable("Id") String Id) {     
+        User user = userService.findUserById(Id) ;
+        return user;
     }
     
    @RequestMapping(method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE})
-    public Maladie createMaladie(@Valid @RequestBody Maladie malaide) {
-        Maladie savedMaladie = maladieService.saveMaladie(malaide);
-        return savedMaladie;
+    public User createUser(@Valid @RequestBody User user) {
+        User savedUser = userService.saveUser(user);
+        return savedUser;
     }
     
     
     @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
-    public Maladie updateMaladie(@PathVariable("Id") String maladieId,
-                              @RequestBody Maladie maladie) { 
-        maladie.setId(maladieId);
-        maladieService.saveMaladie(maladie);
-        return maladie;
+    public User updateUser(@PathVariable("Id") String userId,
+                              @RequestBody User user) { 
+        user.setId(userId);
+        userService.saveUser(user);
+        return user;
     }
 
     @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMaladie(@PathVariable("Id") String maladieId) {
-        maladieService.deleteMaladie(maladieId);
+    public void deleteUser(@PathVariable("Id") String userId) {
+        userService.deleteUser(userId);
     }
 
-    
 }

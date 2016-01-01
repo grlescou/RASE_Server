@@ -5,19 +5,14 @@
  */
 package ht.mbds.haiti.rase.repository;
 
-import ht.mbds.haiti.rase.model.Maladie;
-import org.springframework.data.repository.Repository;
-import java.util.List;
+import ht.mbds.haiti.rase.model.Demographie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import org.springframework.data.mongodb.repository.Query;
 /**
  *
  * @author MyPC
  */
-public interface MaladieRepository extends MongoRepository<Maladie,String> {
-    
-    
-    public Maladie findByNom(String nom);
-     
+public interface DemographieRepository extends MongoRepository<Demographie,Long>, DemographieRepositoryCostum{
+  public Demographie findByPropertiesCOMMUNE (String Commune) ;
+  
 }

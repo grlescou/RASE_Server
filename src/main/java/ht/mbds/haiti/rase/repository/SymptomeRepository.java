@@ -5,19 +5,13 @@
  */
 package ht.mbds.haiti.rase.repository;
 
-import ht.mbds.haiti.rase.model.Maladie;
-import org.springframework.data.repository.Repository;
-import java.util.List;
+import ht.mbds.haiti.rase.model.Symptome;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import org.springframework.data.mongodb.repository.Query;
 /**
  *
  * @author MyPC
  */
-public interface MaladieRepository extends MongoRepository<Maladie,String> {
-    
-    
-    public Maladie findByNom(String nom);
-     
+public interface SymptomeRepository extends MongoRepository<Symptome,String>{
+    public Symptome findByNom(String nom);
 }

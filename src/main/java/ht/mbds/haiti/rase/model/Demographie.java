@@ -20,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Demographie implements Serializable 
 {
     @Id
-    private String _id ;
+    private String id ;
     
     private Properties properties;
 
@@ -32,7 +32,7 @@ public class Demographie implements Serializable
     }
 
     public Demographie(String _id, Properties properties, String type, GeoJsonPolygon geometry) {
-        this._id = _id;
+        this.id = _id;
         this.properties = properties;
         this.type = type;
         this.geometry = geometry;
@@ -40,11 +40,11 @@ public class Demographie implements Serializable
 
    
     public String getId() {
-        return _id;
+        return id;
     }
 
     public void setId(String _id) {
-        this._id = _id;
+        this.id = _id;
     }
 
     public Properties getProperties ()

@@ -16,10 +16,16 @@ public interface MaladieService {
     
     // maladie 
     
-    public Maladie findMaladieById(long id);
+    public Maladie findMaladieById(String id);
     
      public Maladie findMaladieByNom(String nom);
      
      public List<Maladie> findMaladieAll();
     
+     public Maladie saveMaladie ( Maladie maladie);
+     
+     public void deleteMaladie (Maladie maladie);
+     
+     public void deleteMaladie (String id);
+     
 }

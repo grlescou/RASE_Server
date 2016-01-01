@@ -5,64 +5,72 @@
  */
 package ht.mbds.haiti.rase.rest;
 
-/**
- *
- * @author MyPC
- */
-
-import ht.mbds.haiti.rase.model.Maladie;
-import ht.mbds.haiti.rase.service.MaladieService;
+import ht.mbds.haiti.rase.model.Symptome;
+import ht.mbds.haiti.rase.service.SymptomeService;
+import ht.mbds.haiti.rase.service.UserService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ *
+ * @author MyPC
+ */
 
 @RestController
-@RequestMapping(value="/v1/maladie")
-public class MaladieController {
+@RequestMapping(value="/v1/symptome")
+public class SymptomeController {
     
-    @Autowired private MaladieService maladieService;
+    
+    @Autowired private SymptomeService symptomeService;
     
     @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
-    public Maladie[] getMaladieArray() {
-        return maladieService.findMaladieAll().toArray(new Maladie[]{});
+    public Symptome[] getSymptomeArray() {
+        return symptomeService.findSymptomeAll().toArray(new Symptome[]{});
     }
     
      @RequestMapping(value="/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Maladie getMaladieById(@PathVariable("Id") String Id) {     
-        Maladie maladie = maladieService.findMaladieById(Id) ;
-        return maladie;
+    public Symptome getSymptomeById(@PathVariable("Id") String Id) {     
+        Symptome user = symptomeService.findSymptomeById(Id) ;
+        return user;
     }
     
    @RequestMapping(method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE})
-    public Maladie createMaladie(@Valid @RequestBody Maladie malaide) {
-        Maladie savedMaladie = maladieService.saveMaladie(malaide);
-        return savedMaladie;
+    public Symptome createSymptome(@Valid @RequestBody Symptome symptome) {
+        Symptome savedSymptome = symptomeService.saveSymptome(symptome);
+        return savedSymptome;
     }
     
     
     @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
-    public Maladie updateMaladie(@PathVariable("Id") String maladieId,
-                              @RequestBody Maladie maladie) { 
-        maladie.setId(maladieId);
-        maladieService.saveMaladie(maladie);
-        return maladie;
+    public Symptome updateSymptome(@PathVariable("Id") String symptomeId,
+                              @RequestBody Symptome symptome) { 
+        symptome.setId(symptomeId);
+        symptomeService.saveSymptome(symptome);
+        return symptome;
     }
 
     @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMaladie(@PathVariable("Id") String maladieId) {
-        maladieService.deleteMaladie(maladieId);
+    public void deleteSymptome(@PathVariable("Id") String symptomeId) {
+        symptomeService.deleteSymptome(symptomeId);
     }
 
-    
 }
+
+
+
+
+
+

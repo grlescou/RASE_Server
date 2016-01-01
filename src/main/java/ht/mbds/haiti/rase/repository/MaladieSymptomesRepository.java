@@ -5,19 +5,17 @@
  */
 package ht.mbds.haiti.rase.repository;
 
-import ht.mbds.haiti.rase.model.Maladie;
-import org.springframework.data.repository.Repository;
+import ht.mbds.haiti.rase.model.MaladieSymptomes;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import org.springframework.data.mongodb.repository.Query;
 /**
  *
  * @author MyPC
  */
-public interface MaladieRepository extends MongoRepository<Maladie,String> {
-    
-    
-    public Maladie findByNom(String nom);
+public interface MaladieSymptomesRepository extends MongoRepository<MaladieSymptomes,Long> {
+     public List<MaladieSymptomes> findByMaladieId(long Id);
+     public List<MaladieSymptomes> findByMaladieNom(String nom);
+     public List<MaladieSymptomes> findBySymptomesId(long Id);
      
 }

@@ -6,7 +6,15 @@
 package ht.mbds.haiti.rase.model;
 
 import java.io.Serializable;
+import org.springframework.data.mongodb.core.geo.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
+import java.util.List;
 
 /**
  *
@@ -16,35 +24,44 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "symptome")
 public class Symptome  implements Serializable 
 {
-    private String _id;
+    @Id
+    private String id;
     private String nom;
     private String description;
 
     public Symptome() {
     }
 
-    public Symptome(String nom, String description) {
+    @JsonCreator
+    public Symptome(@JsonProperty("nom") String nom, @JsonProperty("description") String description) {
         this.nom = nom;
         this.description = description;
     }
 
+    /*
     public Symptome(String _id, String nom, String description) {
-        this._id = _id;
+        this.id = _id;
         this.nom = nom;
         this.description = description;
+    }
+
+    */
+     @JsonIgnore
+    public boolean isNew() {
+        return id == null;
+    }
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
    
 
-    public String get_id ()
-    {
-        return _id;
-    }
-
-    public void set_id (String _id)
-    {
-        this._id = _id;
-    }
+   
 
     public String getDescription ()
     {
@@ -69,6 +86,6 @@ public class Symptome  implements Serializable
     @Override
     public String toString()
     {
-        return "Symptome [_id = "+_id+", description = "+description+", nom = "+nom+"]";
+        return "Symptome [_id = "+id+", description = "+description+", nom = "+nom+"]";
     }
 }
