@@ -34,6 +34,7 @@ public class CasMaladie  implements Serializable
  
     private String date;
 
+    // the coordinates must be stored in the longitude, latitude order
     private List<Double> location;
 
    

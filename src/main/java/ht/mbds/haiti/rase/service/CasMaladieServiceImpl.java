@@ -23,12 +23,12 @@ public class CasMaladieServiceImpl implements CasMaladieService {
     @Autowired private CasMaladieRepository casMaladieRepository;
     
     @Override
-    public CasMaladie findCasMaladieById(long id) {
+    public CasMaladie findCasMaladieById(String id) {
       return  casMaladieRepository.findOne(id);
     }
 
     @Override
-    public List<CasMaladie> findCasMaladieByMaladieId(long Id) {
+    public List<CasMaladie> findCasMaladieByMaladieId(String Id) {
         return  casMaladieRepository.findByMaladieId(Id);
     }
 
@@ -63,7 +63,7 @@ public class CasMaladieServiceImpl implements CasMaladieService {
     }
 
     @Override
-    public void deleteCasMaladie(long id) {
+    public void deleteCasMaladie(String id) {
        casMaladieRepository.delete(id);
     }
     

@@ -15,9 +15,9 @@ import java.util.List;
 public interface CasMaladieService {
     
   // CasMaladie 
-     public CasMaladie findCasMaladieById(long id);
+     public CasMaladie findCasMaladieById(String id);
     
-     public List<CasMaladie> findCasMaladieByMaladieId(long Id);
+     public List<CasMaladie> findCasMaladieByMaladieId(String Id);
      public List<CasMaladie> findCasMaladieByMaladieNom(String nom);
 //     public List<CasMaladie> findCasMaladieBySymptomesId(long Id);
 //     public List<CasMaladie> findCasMaladieBySymptomesNom(String nom);
@@ -28,6 +28,6 @@ public interface CasMaladieService {
      
      public void deleteCasMaladie (CasMaladie casMaladie);
      
-     public void deleteCasMaladie (long id);  
+     public void deleteCasMaladie (String id);  
     
 }

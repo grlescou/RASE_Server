@@ -23,12 +23,12 @@ public class MaladieSymptomesServiceImpl implements MaladieSymptomesService{
     @Autowired private MaladieSymptomesRepository maladieSymptomesRepository ;
     
     @Override
-    public MaladieSymptomes findMaladieSymptomesById(long id) {
+    public MaladieSymptomes findMaladieSymptomesById(String id) {
        return maladieSymptomesRepository.findOne(id);
     }
 
     @Override
-    public List<MaladieSymptomes> findMaladieSymptomesByMaladieId(long Id) {
+    public List<MaladieSymptomes> findMaladieSymptomesByMaladieId(String Id) {
         return maladieSymptomesRepository.findByMaladieId(Id);
     }
 
@@ -38,7 +38,7 @@ public class MaladieSymptomesServiceImpl implements MaladieSymptomesService{
     }
 
     @Override
-    public List<MaladieSymptomes> findMaladieSymptomesBySymptomesId(long Id) {
+    public List<MaladieSymptomes> findMaladieSymptomesBySymptomesId(String Id) {
         return maladieSymptomesRepository.findBySymptomesId(Id);
     }
 
@@ -58,7 +58,7 @@ public class MaladieSymptomesServiceImpl implements MaladieSymptomesService{
     }
 
     @Override
-    public void deleteMaladieSymptomes(long id) {
+    public void deleteMaladieSymptomes(String id) {
         maladieSymptomesRepository.delete(id);
     }
     

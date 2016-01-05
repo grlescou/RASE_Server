@@ -33,6 +33,8 @@ public class User  implements Serializable
     private Profession profession;
     //private String Telephone ;
     // private Adresse adresse ;
+    
+    // the coordinates must be stored in the longitude, latitude order
     private List<Double> dernierLocation;
     private boolean actif;
     private String ip;

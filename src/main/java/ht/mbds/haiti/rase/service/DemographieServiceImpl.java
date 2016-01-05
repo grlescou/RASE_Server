@@ -7,6 +7,7 @@ package ht.mbds.haiti.rase.service;
 
 import ht.mbds.haiti.rase.model.Demographie;
 import ht.mbds.haiti.rase.repository.DemographieRepository;
+import ht.mbds.haiti.rase.utils.GeoLocation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
@@ -25,14 +26,11 @@ public class DemographieServiceImpl implements DemographieService {
     @Autowired private DemographieRepository demographieRepository;
     
     @Override
-    public Demographie getDemographieByGeomIntersectPoint(Point point) {
-       return demographieRepository.getDemographieByGeomIntersectPoint(point);
+    public Demographie getDemographieByGeomIntersectPoint(GeoLocation Glocation) {
+       return demographieRepository.getDemographieByGeomIntersectPoint(Glocation);
     }
 
-    @Override
-    public Demographie getDemographieByGeomIntersectGeoJsonPoint(GeoJsonPoint point) {
-         return demographieRepository.getDemographieByGeomIntersectGeoJsonPoint(point);
-    }
+    
 
     @Override
     public List<Demographie> findDemographieAll() {

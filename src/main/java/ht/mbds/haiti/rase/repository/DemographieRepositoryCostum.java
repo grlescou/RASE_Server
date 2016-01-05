@@ -6,6 +6,8 @@
 package ht.mbds.haiti.rase.repository;
 
 import ht.mbds.haiti.rase.model.Demographie;
+import ht.mbds.haiti.rase.utils.GeoLocation;
+import java.util.List;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
@@ -15,9 +17,9 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
  */
 public interface DemographieRepositoryCostum {
     
-   public Demographie getDemographieByGeomIntersectPoint( Point point); 
+   public Demographie getDemographieByGeomIntersectPoint( GeoLocation Glocation); 
    
-   public Demographie getDemographieByGeomIntersectGeoJsonPoint( GeoJsonPoint point); 
+   
    
    public void test ();
 }

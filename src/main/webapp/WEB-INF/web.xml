@@ -12,7 +12,7 @@
     
      <!-- This application uses ServletContainerInitializer AND web.xml -->
   <welcome-file-list>
-    <welcome-file>home.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
    
     <filter>

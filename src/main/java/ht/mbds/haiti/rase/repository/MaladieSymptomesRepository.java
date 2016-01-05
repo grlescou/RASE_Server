@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author MyPC
  */
-public interface MaladieSymptomesRepository extends MongoRepository<MaladieSymptomes,Long> {
-     public List<MaladieSymptomes> findByMaladieId(long Id);
+public interface MaladieSymptomesRepository extends MongoRepository<MaladieSymptomes,String> {
+     public List<MaladieSymptomes> findByMaladieId(String Id);
      public List<MaladieSymptomes> findByMaladieNom(String nom);
-     public List<MaladieSymptomes> findBySymptomesId(long Id);
+     public List<MaladieSymptomes> findBySymptomesId(String Id);
      
 }

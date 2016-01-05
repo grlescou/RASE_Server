@@ -26,12 +26,12 @@ public class Demographie implements Serializable
 
     private String type;
 
-    private GeoJsonPolygon geometry;
+    private Geometry geometry;
 
     public Demographie() {
     }
 
-    public Demographie(String _id, Properties properties, String type, GeoJsonPolygon geometry) {
+    public Demographie(String _id, Properties properties, String type, Geometry geometry) {
         this.id = _id;
         this.properties = properties;
         this.type = type;
@@ -67,12 +67,12 @@ public class Demographie implements Serializable
         this.type = type;
     }
 
-    public GeoJsonPolygon getGeometry ()
+    public Geometry getGeometry ()
     {
         return geometry;
     }
 
-    public void setGeometry (GeoJsonPolygon geometry)
+    public void setGeometry (Geometry geometry)
     {
         this.geometry = geometry;
     }
@@ -80,6 +80,6 @@ public class Demographie implements Serializable
     @Override
     public String toString()
     {
-        return "Demographie [properties = "+properties+", type = "+type+", geometry = "+geometry.getPoints().toString()+"]";
+        return "Demographie [properties = "+properties+", type = "+type+", geometry = "+geometry.getCoordinates().toString()+"]";
     }
 }

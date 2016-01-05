@@ -13,11 +13,11 @@ import java.util.List;
  * @author MyPC
  */
 public interface MaladieSymptomesService {
-     public MaladieSymptomes findMaladieSymptomesById(long id);
+     public MaladieSymptomes findMaladieSymptomesById(String id);
     
-     public List<MaladieSymptomes> findMaladieSymptomesByMaladieId(long Id);
+     public List<MaladieSymptomes> findMaladieSymptomesByMaladieId(String Id);
      public List<MaladieSymptomes> findMaladieSymptomesByMaladieNom(String nom);
-     public List<MaladieSymptomes> findMaladieSymptomesBySymptomesId(long Id);
+     public List<MaladieSymptomes> findMaladieSymptomesBySymptomesId(String Id);
    
      
      public List<MaladieSymptomes> findMaladieSymptomesAll();
@@ -26,5 +26,5 @@ public interface MaladieSymptomesService {
      
      public void deleteMaladieSymptomes (MaladieSymptomes maladieSymptomes);
      
-     public void deleteMaladieSymptomes (long id);
+     public void deleteMaladieSymptomes (String id);
 }

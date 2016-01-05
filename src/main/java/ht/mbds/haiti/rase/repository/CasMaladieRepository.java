@@ -13,8 +13,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author MyPC
  */
-public interface CasMaladieRepository extends MongoRepository<CasMaladie,Long>{
-     public List<CasMaladie> findByMaladieId(long Id);
+public interface CasMaladieRepository extends MongoRepository<CasMaladie,String>{
+     public List<CasMaladie> findByMaladieId(String Id);
      public List<CasMaladie> findByMaladieNom(String nom);
 //     public List<CasMaladie> findBySymptomesId(long Id);
 //     public List<CasMaladie> findBySymptomesNom(String nom);
