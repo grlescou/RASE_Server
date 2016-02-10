@@ -5,8 +5,8 @@
  */
 package ht.mbds.haiti.rase.utils;
 
-import ht.mbds.haiti.rase.model.Demographie;
-import ht.mbds.haiti.rase.model.Zone;
+import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Zone;
 
 /**
  *

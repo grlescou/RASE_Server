@@ -5,8 +5,7 @@
  */
 package ht.mbds.haiti.rase.rest;
 
-import ht.mbds.haiti.rase.model.Profession;
-import ht.mbds.haiti.rase.service.UserService;
+import ht.mbds.haiti.rase.model.model.Profession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ht.mbds.haiti.rase.service.UtilisateurService;
 /**
  *
  * @author MyPC
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProfessionController {
     
     
-    @Autowired private UserService professionService;
+    @Autowired private UtilisateurService professionService;
     
     @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
     public Profession[] getProfessionArray() {

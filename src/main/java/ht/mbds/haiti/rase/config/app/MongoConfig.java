@@ -11,7 +11,7 @@ package ht.mbds.haiti.rase.config.app;
  */
 
 
-import ht.mbds.haiti.rase.repository.RepositoryPackage;
+import ht.mbds.haiti.rase.model.repository.RepositoryPackage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;

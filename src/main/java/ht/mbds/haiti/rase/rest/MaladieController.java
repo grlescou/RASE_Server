@@ -10,7 +10,7 @@ package ht.mbds.haiti.rase.rest;
  * @author MyPC
  */
 
-import ht.mbds.haiti.rase.model.Maladie;
+import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.service.MaladieService;
 import javax.validation.Valid;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

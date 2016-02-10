@@ -5,8 +5,8 @@
  */
 package ht.mbds.haiti.rase.service;
 
-import ht.mbds.haiti.rase.model.Symptome;
-import ht.mbds.haiti.rase.repository.SymptomeRepository;
+import ht.mbds.haiti.rase.model.model.Symptome;
+import ht.mbds.haiti.rase.model.repository.SymptomeRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

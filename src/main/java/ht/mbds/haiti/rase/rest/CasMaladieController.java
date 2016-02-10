@@ -5,9 +5,9 @@
  */
 package ht.mbds.haiti.rase.rest;
 
-import ht.mbds.haiti.rase.model.CasMaladie;
-import ht.mbds.haiti.rase.model.Demographie;
-import ht.mbds.haiti.rase.model.Zone;
+import ht.mbds.haiti.rase.model.model.CasMaladie;
+import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Zone;
 import ht.mbds.haiti.rase.service.CasMaladieService;
 import ht.mbds.haiti.rase.service.DemographieService;
 import ht.mbds.haiti.rase.utils.GeoLocation;

@@ -5,9 +5,8 @@
  */
 package ht.mbds.haiti.rase.rest;
 
-import ht.mbds.haiti.rase.model.Symptome;
+import ht.mbds.haiti.rase.model.model.Symptome;
 import ht.mbds.haiti.rase.service.SymptomeService;
-import ht.mbds.haiti.rase.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ht.mbds.haiti.rase.service.UtilisateurService;
 /**
  *
  * @author MyPC

@@ -5,7 +5,7 @@
  */
 package ht.mbds.haiti.rase.service;
 
-import ht.mbds.haiti.rase.model.CasMaladie;
+import ht.mbds.haiti.rase.model.model.CasMaladie;
 import java.util.List;
 
 /**

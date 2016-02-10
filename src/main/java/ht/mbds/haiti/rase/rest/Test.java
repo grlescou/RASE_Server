@@ -11,13 +11,16 @@ package ht.mbds.haiti.rase.rest;
  */
 
 
+import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.service.DemographieService;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 import javax.validation.Valid;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +34,14 @@ public class Test {
      @Autowired private DemographieService demo;
     
     @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
-    public String getMaladieArray() {
+    public String getTest() {
         demo.test();
         return "Test done..";
+    }
+    
+       @RequestMapping(value="/user", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public SimpleMessage getTestUser() {     
+        
+        return demo.createUtilisateur();
     }
 }

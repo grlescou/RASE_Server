@@ -5,8 +5,8 @@
  */
 package ht.mbds.haiti.rase.service;
 
-import ht.mbds.haiti.rase.model.CasMaladie;
-import ht.mbds.haiti.rase.repository.CasMaladieRepository;
+import ht.mbds.haiti.rase.model.model.CasMaladie;
+import ht.mbds.haiti.rase.model.repository.CasMaladieRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

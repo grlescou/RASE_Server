@@ -5,9 +5,13 @@
  */
 package ht.mbds.haiti.rase.service;
 
-import ht.mbds.haiti.rase.model.Demographie;
-import ht.mbds.haiti.rase.repository.DemographieRepository;
+import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.PersonnelSante;
+import ht.mbds.haiti.rase.model.model.Utilisateur;
+import ht.mbds.haiti.rase.model.repository.DemographieRepository;
 import ht.mbds.haiti.rase.utils.GeoLocation;
+import ht.mbds.haiti.rase.utils.Message;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
@@ -40,6 +44,17 @@ public class DemographieServiceImpl implements DemographieService {
     @Override
     public void test() {
         demographieRepository.test();
+    }
+
+    @Override
+    public SimpleMessage createUtilisateur() {
+       
+      boolean ok = demographieRepository.createUtilisateur();
+       
+      if (ok)
+        return new SimpleMessage("terminer avec success",ok);
+      else
+          return new SimpleMessage("terminer avec error",ok);
     }
     
 }

@@ -10,8 +10,8 @@ package ht.mbds.haiti.rase.service;
  * @author MyPC
  */
 
-import ht.mbds.haiti.rase.model.Maladie;
-import ht.mbds.haiti.rase.repository.MaladieRepository;
+import ht.mbds.haiti.rase.model.model.Maladie;
+import ht.mbds.haiti.rase.model.repository.MaladieRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
