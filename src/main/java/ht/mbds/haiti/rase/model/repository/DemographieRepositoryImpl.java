@@ -395,9 +395,9 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
 	mongoOperation.save(pInfirmiere);
         
         // Personnel de sante 
-	PersonnelSante user1 = new PersonnelSante("Jean","Pierre","jpierre@gamil.com","pass12345","PersonnelSante","50937695611",new Adresse(),true,"192.168.1.1",pMedecin, new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),false);
-        PersonnelSante user2 = new PersonnelSante("Carl","Preval","cpreval@gamil.com","abc12345","PersonnelSante","50937898882",new Adresse(),true,"192.168.1.1",pMedecin,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),false);
-        PersonnelSante user3 = new PersonnelSante("Jeanne","Lemoine","jLemoine@gamil.com","pass12345","PersonnelSante","50938694631",new Adresse(),true,"192.168.1.1",pInfirmiere,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),false);
+	PersonnelSante user1 = new PersonnelSante("Jean","Pierre","jpierre@gamil.com","pass12345","PersonnelSante","50937695611",new Adresse(),true,"192.168.1.1",pMedecin, new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"En Cours");
+        PersonnelSante user2 = new PersonnelSante("Carl","Preval","cpreval@gamil.com","abc12345","PersonnelSante","50937898882",new Adresse(),true,"192.168.1.1",pMedecin,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"En Cours");
+        PersonnelSante user3 = new PersonnelSante("Jeanne","Lemoine","jLemoine@gamil.com","pass12345","PersonnelSante","50938694631",new Adresse(),true,"192.168.1.1",pInfirmiere,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"Accepter");
          // save
 	mongoOperation.save(user1);
          // save

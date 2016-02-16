@@ -23,18 +23,18 @@ public class PersonnelSante extends Utilisateur implements Serializable {
     private Profession profession;
     // the coordinates must be stored in the longitude, latitude order
     private List<Double> dernierLocation;
-    private boolean valider ;
+    private String status ;  // "En Cours", "Accepter" , "Rejeter"
 
     public PersonnelSante() {
     }
 
 
     @JsonCreator
-    public PersonnelSante(@JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("role") String role, @JsonProperty("telephone") String telephone, @JsonProperty("adresse") Adresse adresse,  @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("profession") Profession profession,  @JsonProperty("dernierLocation")   List<Double> dernierLocation, @JsonProperty("valider") boolean valider) {
+    public PersonnelSante(@JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("role") String role, @JsonProperty("telephone") String telephone, @JsonProperty("adresse") Adresse adresse,  @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("profession") Profession profession,  @JsonProperty("dernierLocation")   List<Double> dernierLocation, @JsonProperty("status") String status) {
         super(prenom, nom, mail, password, role, telephone, adresse, actif, ip);
         this.profession = profession;
         this.dernierLocation = dernierLocation;
-        this.valider = valider;
+        this.status = status;
     }
 
     public Profession getProfession() {
@@ -53,13 +53,15 @@ public class PersonnelSante extends Utilisateur implements Serializable {
         this.dernierLocation = dernierLocation;
     }
 
-    public boolean isValider() {
-        return valider;
+    public String getStatus() {
+        return status;
     }
 
-    public void setValider(boolean valider) {
-        this.valider = valider;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
+    
     
     
     
