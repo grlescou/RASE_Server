@@ -11,6 +11,8 @@ import ht.mbds.haiti.rase.model.model.Zone;
 import ht.mbds.haiti.rase.service.CasMaladieService;
 import ht.mbds.haiti.rase.service.DemographieService;
 import ht.mbds.haiti.rase.utils.GeoLocation;
+import ht.mbds.haiti.rase.utils.Message;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 import ht.mbds.haiti.rase.utils.Zonage;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value="/v1/casMaladie")
 public class CasMaladieController {
+    
+    // message success
+    static final String success_message_casMaladie_create = "Le cas maladie a été créé avec succès";
+    static final String success_message_casMaladie_update = "Le cas maladie a été modifié avec succès";
+    static final String success_message_casMaladie_delete = "Le cas maladie a été supprimé avec succès";
+    // message fail
+    static final String fail_message_casMaladie_create = "Echec de creation du cas maladie";
+    static final String fail_message_casMaladie_update = "Echec de modification du cas maladie";
+    static final String fail_message_casMaladie_delete = "Echec de suppression du cas maladie";
+    
      @Autowired private CasMaladieService casMaladieService;
      @Autowired private DemographieService demographieService;
     
@@ -45,27 +57,64 @@ public class CasMaladieController {
     }
     
    @RequestMapping(method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE})
-    public CasMaladie createCasMaladie(@Valid @RequestBody CasMaladie casMaladie) {
-        GeoLocation location = new GeoLocation(casMaladie.getLocation());
+   public Message createCasMaladie(@Valid @RequestBody CasMaladie casMaladie)
+    //public CasMaladie createCasMaladie(@Valid @RequestBody CasMaladie casMaladie)
+    {
+       Message<CasMaladie> message=null;
+       try
+        {
+           GeoLocation location = new GeoLocation(casMaladie.getLocation());
         Demographie demog =demographieService.getDemographieByGeomIntersectPoint(location);
         Zone zone = Zonage.getZoneFromDemographie(demog);
         casMaladie.setZone(zone);
         CasMaladie savedCasMaladie = casMaladieService.saveCasMaladie(casMaladie);
-        return savedCasMaladie;
-    }
+        message = new Message<>(success_message_casMaladie_create,true,savedCasMaladie);
+         return message;
+        }
+       catch(Exception ex)
+       {
+           message = new Message<>(fail_message_casMaladie_create,false,null);
+             return message;
+       }
+        
+   
+     }
     
     
     @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
-    public CasMaladie updateCasMaladie(@PathVariable("Id") String casMaladieId,
-                              @RequestBody CasMaladie casMaladie) { 
-        casMaladie.setId(casMaladieId);
-        casMaladieService.saveCasMaladie(casMaladie);
-        return casMaladie;
+    public SimpleMessage updateCasMaladie(@PathVariable("Id") String casMaladieId,@RequestBody CasMaladie casMaladie)
+    { 
+         SimpleMessage message = null;
+        try
+        {
+            casMaladie.setId(casMaladieId);
+            casMaladieService.saveCasMaladie(casMaladie);
+            message = new SimpleMessage(success_message_casMaladie_update,true);
+            return message;
+        }
+        catch(Exception ex)
+        {
+             message = new SimpleMessage(fail_message_casMaladie_update,true);
+             return message;
+        }
+       
     }
 
     @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCasMaladie(@PathVariable("Id") String casMaladieId) {
-        casMaladieService.deleteCasMaladie(casMaladieId);
+    public SimpleMessage deleteCasMaladie(@PathVariable("Id") String casMaladieId) {
+        SimpleMessage message = null;
+        try
+        {
+            casMaladieService.deleteCasMaladie(casMaladieId);
+             message = new SimpleMessage(success_message_casMaladie_delete,true);
+            return message;
+        }
+        catch(Exception Ex)
+        {
+             message = new SimpleMessage(fail_message_casMaladie_delete,true);
+            return message;
+        }
+        
     }
 }
