@@ -12,6 +12,8 @@ package ht.mbds.haiti.rase.rest;
 
 import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.service.MaladieService;
+import ht.mbds.haiti.rase.utils.Message;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 import javax.validation.Valid;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
@@ -30,6 +32,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/v1/maladie")
 public class MaladieController {
     
+    //message success
+    static final String success_message_maladie_create = "La maladie a été créée avec succès";
+    static final String success_message_maladie_update = "La maladie a été modifiée avec succès";
+    static final String success_message_maladie_delete = "La maladie a été supprimée avec succès";
+    // message fail
+    static final String fail_message_maladie_create = "Echec de création de la maladie";
+    static final String fail_message_maladie_update = "Echec de modification de la maladie";
+    static final String fail_message_maladie_delete = "Echec de suppression de la maladie";
+    
     @Autowired private MaladieService maladieService;
     
     @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
@@ -44,24 +55,59 @@ public class MaladieController {
     }
     
    @RequestMapping(method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE})
-    public Maladie createMaladie(@Valid @RequestBody Maladie malaide) {
-        Maladie savedMaladie = maladieService.saveMaladie(malaide);
-        return savedMaladie;
+    public Message createMaladie(@Valid @RequestBody Maladie malaide) {
+        Message<Maladie> message= null;
+        try
+        {
+            Maladie savedMaladie = maladieService.saveMaladie(malaide);
+            message = new Message<>(success_message_maladie_create,true,savedMaladie);
+            return message;
+        }
+        catch(Exception ex)
+        {
+            message = new Message<>(fail_message_maladie_create,false,null);
+            return message;
+        }
+        
     }
     
     
     @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
-    public Maladie updateMaladie(@PathVariable("Id") String maladieId,
-                              @RequestBody Maladie maladie) { 
-        maladie.setId(maladieId);
-        maladieService.saveMaladie(maladie);
-        return maladie;
+    public SimpleMessage updateMaladie(@PathVariable("Id") String maladieId,
+                              @RequestBody Maladie maladie) {
+        SimpleMessage message =null;
+        try
+        {
+            maladie.setId(maladieId);
+            maladieService.saveMaladie(maladie);
+            message= new SimpleMessage(success_message_maladie_update,true);
+            return message;
+        }
+        catch(Exception ex)
+        {
+            message= new SimpleMessage(fail_message_maladie_update,true);
+            return message;
+        }
+       
+       
     }
 
     @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMaladie(@PathVariable("Id") String maladieId) {
-        maladieService.deleteMaladie(maladieId);
+    public SimpleMessage deleteMaladie(@PathVariable("Id") String maladieId) {
+         SimpleMessage message =null;
+         try
+         {
+             maladieService.deleteMaladie(maladieId);
+             message= new SimpleMessage(success_message_maladie_delete,true);
+             return message;
+         }
+         catch(Exception ex)
+         {
+             message= new SimpleMessage(fail_message_maladie_delete,true);
+             return message;
+         }
+        
     }
 
     

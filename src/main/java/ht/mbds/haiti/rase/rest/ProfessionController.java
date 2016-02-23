@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ht.mbds.haiti.rase.service.UtilisateurService;
+import ht.mbds.haiti.rase.utils.Message;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 /**
  *
  * @author MyPC
@@ -31,6 +33,14 @@ import ht.mbds.haiti.rase.service.UtilisateurService;
 @RequestMapping(value="/v1/profession")
 public class ProfessionController {
     
+    //message success
+    static final String success_message_profession_create = "La profession a été créée avec succès";
+    static final String success_message_profession_update = "La profession a été modifiée avec succès";
+    static final String success_message_profession_delete = "La profession a été supprimée avec succès";
+    // message fail
+    static final String fail_message_profession_create = "Echec de création de la profession";
+    static final String fail_message_profession_update = "Echec de modification de la profession";
+    static final String fail_message_profession_delete = "Echec de suppression de la profession";
     
     @Autowired private UtilisateurService professionService;
     
@@ -46,24 +56,60 @@ public class ProfessionController {
     }
     
    @RequestMapping(method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE})
-    public Profession createProfession(@Valid @RequestBody Profession profession) {
-        Profession savedProfession = professionService.saveProfession(profession);
-        return savedProfession;
+    public Message createProfession(@Valid @RequestBody Profession profession) {
+        Message<Profession> message = null;
+        try
+        {
+             Profession savedProfession = professionService.saveProfession(profession);
+             message= new Message<>(success_message_profession_create,true,savedProfession);
+             return message;
+        }
+        catch(Exception ex)
+        {
+            message= new Message<>(fail_message_profession_create,false,null);
+             return message;
+        }
+       
+       
     }
     
     
     @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
-    public Profession updateProfession(@PathVariable("Id") String professionId,
+    public SimpleMessage updateProfession(@PathVariable("Id") String professionId,
                               @RequestBody Profession profession) { 
-        profession.setId(professionId);
-        professionService.saveProfession(profession);
-        return profession;
+        SimpleMessage message=null;
+        try
+        {
+             profession.setId(professionId);
+             professionService.saveProfession(profession);
+             message=new SimpleMessage(success_message_profession_update,true);
+             return message;
+        }
+        catch(Exception ex)
+        {
+             message=new SimpleMessage(fail_message_profession_update,true);
+             return message;
+        }
+       
+        
     }
 
     @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProfession(@PathVariable("Id") String professionId) {
-        professionService.deleteProfession(professionId);
+    public SimpleMessage deleteProfession(@PathVariable("Id") String professionId) {
+         SimpleMessage message=null;
+        try
+        {
+            professionService.deleteProfession(professionId);
+            message=new SimpleMessage(success_message_profession_delete,true);
+            return message;
+        }
+        catch(Exception ex)
+        {
+            message=new SimpleMessage(fail_message_profession_delete,true);
+            return message;
+        }
+        
     }
 
 }
