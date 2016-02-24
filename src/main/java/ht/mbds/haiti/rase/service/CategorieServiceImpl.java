@@ -9,14 +9,20 @@ import ht.mbds.haiti.rase.model.model.Categorie;
 import ht.mbds.haiti.rase.model.repository.CategorieRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Kathleen
  */
+
+@Service
+@Transactional
 public class CategorieServiceImpl implements CategorieService{
  
-     @Autowired private CategorieRepository categorieRepository;
+    @Autowired private CategorieRepository categorieRepository;
+     
     @Override
     public Categorie findCategorieById(String id) {
       return  categorieRepository.findOne(id);
