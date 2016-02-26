@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -27,13 +28,15 @@ public class Maladie implements Serializable
     private String description;
     private double  seuil;
     private String typeSeuil;
+    
     @DBRef
     private Categorie categorie;
     @DBRef
-    private List<Symptome> symptomes;
+    private List<Symptome> symptomes= new ArrayList<>();
     
     public Maladie() {
     }
+    
     @JsonCreator
     public Maladie(@JsonProperty("nom") String nom, @JsonProperty("description") String description, @JsonProperty("seuil") int seuil) {
         this.nom = nom;
@@ -94,6 +97,16 @@ public class Maladie implements Serializable
     public void setSeuil(double seuil) {
         this.seuil = seuil;
     }
+    
+    
+    public void addSymptome (Symptome newSymptome){
+        symptomes.add(newSymptome);
+    }
+    
+    public void removeSymptome(Symptome removeSymptome){
+        symptomes.remove(removeSymptome);
+    }
+    
 
     @Override
     public String toString() {

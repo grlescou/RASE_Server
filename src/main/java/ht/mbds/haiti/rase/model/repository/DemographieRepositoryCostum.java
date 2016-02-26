@@ -7,6 +7,7 @@ package ht.mbds.haiti.rase.model.repository;
 
 import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.utils.GeoLocation;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 import java.util.List;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -23,4 +24,6 @@ public interface DemographieRepositoryCostum {
    
    public void test ();
    public boolean createUtilisateur();
+   public SimpleMessage creerCategorie ();
+   
 }

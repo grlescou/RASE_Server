@@ -56,5 +56,14 @@ public class DemographieServiceImpl implements DemographieService {
       else
           return new SimpleMessage("terminer avec error",ok);
     }
+
+    @Override
+    public SimpleMessage createCategorie() {
+        return demographieRepository.creerCategorie();
+    }
+    
+    
+    
+    
     
 }

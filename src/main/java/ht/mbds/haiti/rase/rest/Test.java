@@ -44,4 +44,10 @@ public class Test {
         
         return demo.createUtilisateur();
     }
+    
+     @RequestMapping(value="/categorie", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public SimpleMessage creerCategorie(){
+        return demo.createCategorie();
+    }
+    
 }

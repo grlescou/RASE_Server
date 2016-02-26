@@ -8,6 +8,8 @@ package ht.mbds.haiti.rase.model.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,8 +24,9 @@ public class Categorie implements Serializable {
     private String id;
     private String nom;
     private String description;
+    
     @DBRef
-    private Maladie maladie;
+    private List<Maladie> listemaladie = new ArrayList<>();
 
     
     public Categorie() {
@@ -76,6 +79,29 @@ public class Categorie implements Serializable {
         this.description = description;
     }
 
+    public List<Maladie> getListemaladie() {
+        return listemaladie;
+    }
+
+    public void setListemaladie(List<Maladie> listemaladie) {
+        this.listemaladie = listemaladie;
+    }
+
+   
+    
+    
+    
+    
+    public void addMaladie(Maladie newMaladie){
+        listemaladie.add(newMaladie);
+    }
+    
+    public void removeMaladie(Maladie removeMaladie)
+    {
+        listemaladie.remove(removeMaladie);
+    }
+    
+    
     
     @Override
     public String toString() {

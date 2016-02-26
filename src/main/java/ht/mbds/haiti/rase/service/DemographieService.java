@@ -23,4 +23,5 @@ public interface DemographieService {
       public List<Demographie> findDemographieAll() ;
       public void test ();
       public SimpleMessage createUtilisateur();
+      public SimpleMessage createCategorie();
 }

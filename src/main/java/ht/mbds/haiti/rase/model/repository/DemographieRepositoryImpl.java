@@ -8,6 +8,7 @@ package ht.mbds.haiti.rase.model.repository;
 import ht.mbds.haiti.rase.model.model.Administrateur;
 import ht.mbds.haiti.rase.model.model.Adresse;
 import ht.mbds.haiti.rase.model.model.CasMaladie;
+import ht.mbds.haiti.rase.model.model.Categorie;
 import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.model.model.PersonnelSante;
@@ -18,6 +19,7 @@ import ht.mbds.haiti.rase.model.model.User;
 import ht.mbds.haiti.rase.model.model.Utilisateur;
 import ht.mbds.haiti.rase.model.model.Zone;
 import ht.mbds.haiti.rase.utils.GeoLocation;
+import ht.mbds.haiti.rase.utils.SimpleMessage;
 import ht.mbds.haiti.rase.utils.Zonage;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,8 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
 
     @Autowired private MongoOperations mongoOperation ;
     @Autowired private ProfessionRepository profRepo;
+    @Autowired private MaladieRepository maladieRepo;
+    @Autowired private CategorieRepository categorieRepo;
     
     @Override
     public Demographie getDemographieByGeomIntersectPoint(GeoLocation Glocation) {
@@ -419,6 +423,45 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         
         }catch(Exception ex){
             return false;
+        }
+        
+        
+    }
+
+    @Override
+    public SimpleMessage creerCategorie() {
+      
+       SimpleMessage message = null;
+        try{
+            
+        
+        Categorie c1 = new Categorie("virus", "maladie liee a des virus");
+        Categorie c2 = new Categorie("bacterie", "maladie liee a des virus");
+        Categorie c3 = new Categorie("piqure moustique", "maladie liee piqure moustique");
+        
+          // query to search user
+	Query searchMaladieQuery = new Query(Criteria.where("nom").is("Choléra"));
+
+	// find the saved user again.
+	
+        Maladie  m1 =  maladieRepo.findByNom("Choléra");
+        c1.addMaladie(m1);
+        
+        
+        
+       categorieRepo.save(c1);
+       categorieRepo.save(c2);
+       categorieRepo.save(c3);
+       
+        
+        
+        
+            return new SimpleMessage("categorie ajouter avec succes",true);
+      
+        }
+        catch(Exception ex)
+        {
+            return  new SimpleMessage("echec categorie ajouter",false);
         }
         
         
