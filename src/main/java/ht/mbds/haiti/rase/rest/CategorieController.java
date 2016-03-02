@@ -69,7 +69,7 @@ public class CategorieController {
     }
     
     
-    @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
+    @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
     public SimpleMessage updateCategorie(@PathVariable("Id") String categorieId,
                               @RequestBody Categorie categorie) { 
         SimpleMessage message=null;
@@ -88,8 +88,8 @@ public class CategorieController {
        
     }
 
-    @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
     public SimpleMessage deleteCategorie(@PathVariable("Id") String categorieId) {
         SimpleMessage message=null;
         try

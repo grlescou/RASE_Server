@@ -100,8 +100,7 @@ public class CasMaladieController {
        
     }
 
-    @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
     public SimpleMessage deleteCasMaladie(@PathVariable("Id") String casMaladieId) {
         SimpleMessage message = null;
         try

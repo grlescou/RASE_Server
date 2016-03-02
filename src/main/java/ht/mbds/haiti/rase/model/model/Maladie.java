@@ -38,10 +38,12 @@ public class Maladie implements Serializable
     }
     
     @JsonCreator
-    public Maladie(@JsonProperty("nom") String nom, @JsonProperty("description") String description, @JsonProperty("seuil") int seuil) {
+    public Maladie(@JsonProperty("nom") String nom, @JsonProperty("description") String description, @JsonProperty("seuil") int seuil,  @JsonProperty("typeSeuil") String typeSeuil,@JsonProperty("categorie") Categorie categorie) {
         this.nom = nom;
         this.description = description;
         this.seuil = seuil;
+        this.typeSeuil =typeSeuil;
+        this.categorie = categorie;
     }
     
 /*
@@ -97,6 +99,31 @@ public class Maladie implements Serializable
     public void setSeuil(double seuil) {
         this.seuil = seuil;
     }
+
+    public String getTypeSeuil() {
+        return typeSeuil;
+    }
+
+    public void setTypeSeuil(String typeSeuil) {
+        this.typeSeuil = typeSeuil;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public List<Symptome> getSymptomes() {
+        return symptomes;
+    }
+
+    public void setSymptomes(List<Symptome> symptomes) {
+        this.symptomes = symptomes;
+    }
+    
     
     
     public void addSymptome (Symptome newSymptome){

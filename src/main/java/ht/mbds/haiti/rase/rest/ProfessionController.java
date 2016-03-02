@@ -74,7 +74,7 @@ public class ProfessionController {
     }
     
     
-    @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
+    @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
     public SimpleMessage updateProfession(@PathVariable("Id") String professionId,
                               @RequestBody Profession profession) { 
         SimpleMessage message=null;
@@ -94,8 +94,7 @@ public class ProfessionController {
         
     }
 
-    @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
     public SimpleMessage deleteProfession(@PathVariable("Id") String professionId) {
          SimpleMessage message=null;
         try

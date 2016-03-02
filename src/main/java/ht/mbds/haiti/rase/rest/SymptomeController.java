@@ -75,7 +75,7 @@ public class SymptomeController {
     }
     
     
-    @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE})
+    @RequestMapping(value="{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
     public SimpleMessage updateSymptome(@PathVariable("Id") String symptomeId,
                               @RequestBody Symptome symptome) { 
          SimpleMessage message = null;
@@ -95,8 +95,7 @@ public class SymptomeController {
        
     }
 
-    @RequestMapping(value="{Id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value="{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
     public SimpleMessage deleteSymptome(@PathVariable("Id") String symptomeId) {
          SimpleMessage message = null;
          try
