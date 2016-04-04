@@ -8,10 +8,13 @@ package ht.mbds.haiti.rase.service;
 import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.model.model.PersonnelSante;
 import ht.mbds.haiti.rase.model.model.Utilisateur;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.repository.CasMaladieRepository;
 import ht.mbds.haiti.rase.model.repository.DemographieRepository;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
@@ -21,13 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 @Service
 @Transactional
 public class DemographieServiceImpl implements DemographieService {
 
     @Autowired private DemographieRepository demographieRepository;
+     @Autowired private CasMaladieRepository casMaladieRepo;
     
     @Override
     public Demographie getDemographieByGeomIntersectPoint(GeoLocation Glocation) {
@@ -61,7 +65,13 @@ public class DemographieServiceImpl implements DemographieService {
     public SimpleMessage createCategorie() {
         return demographieRepository.creerCategorie();
     }
-    
+
+//    @Override
+//    public List<CasMaladieMR> getCasMaladieMR(long idMaldie) {
+//        List<CasMaladieMR> listCasMaladieMRs = new ArrayList<CasMaladieMR>(casMaladieRepo.getCasMaladieMR(idMaldie).values());
+//       return listCasMaladieMRs;
+//    }
+//    
     
     
     

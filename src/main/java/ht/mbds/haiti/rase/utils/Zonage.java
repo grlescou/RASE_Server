@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in Project PropertiesDemographie.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -21,7 +21,7 @@ public class Zonage {
         zone.setDepartement(demographie.getProperties().getDEPARTEMEN());
         zone.setCommune(demographie.getProperties().getCOMMUNE());
         zone.setArrondissement("none");
-        zone.setSectionCommunale("none");
+        zone.setSectionCommunale(demographie.getProperties().getSection());
         
     }
 
@@ -34,7 +34,7 @@ public class Zonage {
         zone.setDepartement(demographie.getProperties().getDEPARTEMEN());
         zone.setCommune(demographie.getProperties().getCOMMUNE());
         zone.setArrondissement("none");
-        zone.setSectionCommunale("none");
+        zone.setSectionCommunale(demographie.getProperties().getSection());
         return zone;
     }
     

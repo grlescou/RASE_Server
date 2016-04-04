@@ -1,17 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in Project PropertiesDemographie.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package ht.mbds.haiti.rase.model.model;
 
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieValue;
 import java.io.Serializable;
 
 /**
  *
  * @author MyPC
  */
-public class Properties  implements Serializable 
+public class PropertiesDemographie  implements Serializable 
 {
     private String OBJECTID_1;
 
@@ -86,6 +87,11 @@ public class Properties  implements Serializable
     private String ID_COMM;
 
     private String OID_;
+    
+    
+    private CasMaladieValue casMaladieValue;
+    
+    
 
     public String getOBJECTID_1 ()
     {
@@ -456,11 +462,22 @@ public class Properties  implements Serializable
     {
         this.OID_ = OID_;
     }
+    
+    
+     public CasMaladieValue getCasMaladieValue() {
+        return casMaladieValue;
+    }
+
+    public void setCasMaladieValue(CasMaladieValue casMaladieValue) {
+        this.casMaladieValue = casMaladieValue;
+    }
+
+    
 
     @Override
     public String toString()
     {
-        return "Properties [OBJECTID_1 = "+OBJECTID_1+", ID_COMMUNE = "+ID_COMMUNE+", ID_SECTION = "+ID_SECTION+", Count_ = "+Count_+", _ANS_ET = "+_ANS_ET+", AIRE_KM2 = "+AIRE_KM2+", PROBLEMS = "+PROBLEMS+", COMMUNE = "+COMMUNE+", HOMMES = "+HOMMES+", BATIMENTS = "+BATIMENTS+", AREA_KM = "+AREA_KM+", AREA_RU_M = "+AREA_RU_M+", NOM_SECTIO = "+NOM_SECTIO+", POP_RU = "+POP_RU+", HOUSES_RU = "+HOUSES_RU+", FAM_UTS_UR = "+FAM_UTS_UR+", NO_DEP = "+NO_DEP+", FID_1 = "+FID_1+", OBJECTID = "+OBJECTID+", DEPARTEMEN = "+DEPARTEMEN+", HOUSES_UR = "+HOUSES_UR+", POP_UR = "+POP_UR+", UNIQ = "+UNIQ+", MOINS_5_AN = "+MOINS_5_AN+", FAM_UTS_RU = "+FAM_UTS_RU+", AREA_UR_M = "+AREA_UR_M+", AREA_RU_KM = "+AREA_RU_KM+", Section = "+Section+", EDITED = "+EDITED+", NO_SECTION = "+NO_SECTION+", FEMMES = "+FEMMES+", MENAGES = "+MENAGES+", AREA_UR_KM = "+AREA_UR_KM+", POPULATION = "+POPULATION+", POP_DENS = "+POP_DENS+", ID_COMM = "+ID_COMM+", OID_ = "+OID_+"]";
+        return "PropertiesDemographie [OBJECTID_1 = "+OBJECTID_1+", ID_COMMUNE = "+ID_COMMUNE+", ID_SECTION = "+ID_SECTION+", Count_ = "+Count_+", _ANS_ET = "+_ANS_ET+", AIRE_KM2 = "+AIRE_KM2+", PROBLEMS = "+PROBLEMS+", COMMUNE = "+COMMUNE+", HOMMES = "+HOMMES+", BATIMENTS = "+BATIMENTS+", AREA_KM = "+AREA_KM+", AREA_RU_M = "+AREA_RU_M+", NOM_SECTIO = "+NOM_SECTIO+", POP_RU = "+POP_RU+", HOUSES_RU = "+HOUSES_RU+", FAM_UTS_UR = "+FAM_UTS_UR+", NO_DEP = "+NO_DEP+", FID_1 = "+FID_1+", OBJECTID = "+OBJECTID+", DEPARTEMEN = "+DEPARTEMEN+", HOUSES_UR = "+HOUSES_UR+", POP_UR = "+POP_UR+", UNIQ = "+UNIQ+", MOINS_5_AN = "+MOINS_5_AN+", FAM_UTS_RU = "+FAM_UTS_RU+", AREA_UR_M = "+AREA_UR_M+", AREA_RU_KM = "+AREA_RU_KM+", Section = "+Section+", EDITED = "+EDITED+", NO_SECTION = "+NO_SECTION+", FEMMES = "+FEMMES+", MENAGES = "+MENAGES+", AREA_UR_KM = "+AREA_UR_KM+", POPULATION = "+POPULATION+", POP_DENS = "+POP_DENS+", ID_COMM = "+ID_COMM+", OID_ = "+OID_+"]";
     }
 }
 			

@@ -6,6 +6,7 @@
 package ht.mbds.haiti.rase.service;
 
 import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
@@ -24,4 +25,6 @@ public interface DemographieService {
       public void test ();
       public SimpleMessage createUtilisateur();
       public SimpleMessage createCategorie();
+      
+     // public List<CasMaladieMR> getCasMaladieMR(long idMaldie);
 }

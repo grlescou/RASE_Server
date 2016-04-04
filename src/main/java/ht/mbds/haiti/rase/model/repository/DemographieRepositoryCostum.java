@@ -6,15 +6,19 @@
 package ht.mbds.haiti.rase.model.repository;
 
 import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Departement;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
 import java.util.List;
+import java.util.Map;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 public interface DemographieRepositoryCostum {
     
@@ -25,5 +29,15 @@ public interface DemographieRepositoryCostum {
    public void test ();
    public boolean createUtilisateur();
    public SimpleMessage creerCategorie ();
+   
+   
+   //  Map/Reduce demographie 
+   
+   //par Departement 
+   public Map<String,DemographieValue> getDemographieByDepartement(); 
+   // par commune
+    public Map<String,DemographieValue> getDemographieByCommune();
+    
+     public List<Demographie> getSectionCommunaleDemographieCM(long idMaladie);
    
 }

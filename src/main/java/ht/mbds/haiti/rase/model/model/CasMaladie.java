@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.geo.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "cas_maladie")
@@ -25,23 +26,23 @@ public class CasMaladie  implements Serializable
 {
     @Id
     private String id;
-    
+     @DBRef
     private Maladie maladie;
-    
+     @DBRef
     private List<Symptome> listeSymptome;
-    
+     @DBRef
     private User user;
- 
+     
     private String date;
-
+    
     // the coordinates must be stored in the longitude, latitude order
     private List<Double> location;
 
-   
+    
     private int note;
-
+    
     private Zone zone;
-
+    
     public CasMaladie() {
     }
     
@@ -57,7 +58,7 @@ public class CasMaladie  implements Serializable
     }
     
     
-     @JsonIgnore
+    @JsonIgnore
     public boolean isNew() {
         return id == null;
     }
@@ -91,8 +92,6 @@ public class CasMaladie  implements Serializable
         this.id = id;
     }
 
-   
-   
 
     public String getDate ()
     {
@@ -149,4 +148,6 @@ public class CasMaladie  implements Serializable
     {
         return "CasMaladie [User = "+user+", Maladie = "+maladie+", _id = "+id+", Date = "+date+", Location = "+location+", Symptome = "+listeSymptome+", Note = "+note+", Zone = "+zone+"]";
     }
+    
+    
 }

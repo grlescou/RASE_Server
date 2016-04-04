@@ -5,14 +5,20 @@
  */
 package ht.mbds.haiti.rase.model.repository;
 
+import ht.mbds.haiti.rase.model.model.Commune;
 import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Departement;
+import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author gaetan
  */
-public interface DemographieRepository extends MongoRepository<Demographie,Long>, DemographieRepositoryCostum{
-  public Demographie findByPropertiesCOMMUNE (String Commune) ;
+public interface CommuneRepositoryCostum {
+    
+     public List<Commune> getCommuneDemographieCM(long idMaladie);
   
+    
+    
 }

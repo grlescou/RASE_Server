@@ -11,10 +11,10 @@ import java.io.Serializable;
  *
  * @author gaetan
  */
-public class Geometry implements Serializable  {
+public class MultiGeometry  implements Serializable {
    private String type;
 
-    private Double[][][] coordinates;
+    private Double[][][] [] coordinates;
 
     public String getType ()
     {
@@ -26,12 +26,12 @@ public class Geometry implements Serializable  {
         this.type = type;
     }
 
-    public Double[][][] getCoordinates ()
+    public Double[][][] [] getCoordinates ()
     {
         return coordinates;
     }
 
-    public void setCoordinates (Double[][][] coordinates)
+    public void setCoordinates (Double[][][] [] coordinates)
     {
         this.coordinates = coordinates;
     }
@@ -39,7 +39,7 @@ public class Geometry implements Serializable  {
     @Override
     public String toString()
     {
-        return "Geometry [type = "+type+"]";
+        return "MultiGeometry [type = "+type+"]";
     }
     
 }

@@ -6,13 +6,13 @@
 package ht.mbds.haiti.rase.model.repository;
 
 import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Departement;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author gaetan
  */
-public interface DemographieRepository extends MongoRepository<Demographie,Long>, DemographieRepositoryCostum{
-  public Demographie findByPropertiesCOMMUNE (String Commune) ;
-  
+public interface DepartementRepository extends MongoRepository<Departement,Long>, DepartementRepositoryCostum {
+    
 }

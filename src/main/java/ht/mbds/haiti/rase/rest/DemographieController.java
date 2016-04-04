@@ -5,12 +5,18 @@
  */
 package ht.mbds.haiti.rase.rest;
 
+import ht.mbds.haiti.rase.model.model.Commune;
 import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Departement;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.service.CommuneService;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import java.util.List;
 
 import ht.mbds.haiti.rase.service.DemographieService;
+import ht.mbds.haiti.rase.service.DepartementService;
+import ht.mbds.haiti.rase.service.SectionCommunaleService;
 import java.util.logging.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +43,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemographieController {
     
     @Autowired private DemographieService demographieService;
+    @Autowired private DepartementService departementService;
+     @Autowired private CommuneService communeService;
+       @Autowired private SectionCommunaleService sectionCommunaleService;
     
     @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
     public Demographie[] getDemographieArray() {
@@ -56,8 +65,45 @@ public class DemographieController {
     }
    
    
-   
-   
+//     @RequestMapping(value="/map/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+//    public List<CasMaladieMR> getCasMaladie(@PathVariable("id") long idMaladie ) {     
+//        //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
+//        
+//      
+//        return demographieService.getCasMaladieMR(idMaladie);
+//    }
+//    
+    
+      @RequestMapping(value="/map/departement/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<Departement> getDepartementDemographieCM(@PathVariable("id") long idMaladie )
+ {     
+        //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
+        
+      
+        return departementService.getDepartement(idMaladie);
+        
+    }
+    
+    
+      @RequestMapping(value="/map/commune/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<Commune> getCommuneDemographieCM(@PathVariable("id") long idMaladie )
+ {     
+        //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
+        
+      
+        return communeService.getCommune(idMaladie);
+        
+    }
+      
+   @RequestMapping(value="/map/sectionCommunale/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<Demographie> getSectionCommunaleDemographieCM(@PathVariable("id") long idMaladie )
+ {     
+        //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
+        
+      
+        return sectionCommunaleService.getSectionCommunale(idMaladie);
+        
+    }  
      
 }
 

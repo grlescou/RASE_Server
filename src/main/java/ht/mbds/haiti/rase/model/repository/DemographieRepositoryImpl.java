@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in Project PropertiesDemographie.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -9,7 +9,9 @@ import ht.mbds.haiti.rase.model.model.Administrateur;
 import ht.mbds.haiti.rase.model.model.Adresse;
 import ht.mbds.haiti.rase.model.model.CasMaladie;
 import ht.mbds.haiti.rase.model.model.Categorie;
+import ht.mbds.haiti.rase.model.model.Commune;
 import ht.mbds.haiti.rase.model.model.Demographie;
+import ht.mbds.haiti.rase.model.model.Departement;
 import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.model.model.PersonnelSante;
 //import ht.mbds.haiti.rase.model.model.MaladieSymptomes;
@@ -18,22 +20,28 @@ import ht.mbds.haiti.rase.model.model.Symptome;
 import ht.mbds.haiti.rase.model.model.User;
 import ht.mbds.haiti.rase.model.model.Utilisateur;
 import ht.mbds.haiti.rase.model.model.Zone;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
 import ht.mbds.haiti.rase.utils.Zonage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Criteria;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 import org.springframework.data.mongodb.core.query.Query;
 
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
 
@@ -41,6 +49,11 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
     @Autowired private ProfessionRepository profRepo;
     @Autowired private MaladieRepository maladieRepo;
     @Autowired private CategorieRepository categorieRepo;
+    
+    
+    @Autowired private CasMaladieRepository casMaladieRepo;
+   // @Autowired private CommuneRepository communeRepo;
+    @Autowired private DemographieRepository demographietRepo;
     
     @Override
     public Demographie getDemographieByGeomIntersectPoint(GeoLocation Glocation) {
@@ -85,7 +98,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
 	User savedUser = mongoOperation.findOne(searchUserQuery, User.class);
 	System.out.println("Find savedUser : " + savedUser);
          
-        // query to search user
+        // query to search malaide
 	Query searchMaladieQuery = new Query(Criteria.where("nom").is("Choléra"));
 
 	// find the saved user again.
@@ -94,13 +107,37 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         
         System.out.println("Find maladie : " + m1);
         
+        
+        
+        // query to search malaide
+	searchMaladieQuery = new Query(Criteria.where("nom").is("Fièvre typhoïde"));
+
+	// find the saved user again.
+	
+        Maladie  m2 =  mongoOperation.findOne(searchMaladieQuery, Maladie.class);
+        
+        System.out.println("Find maladie : " + m2);
+        
+        
+          // query to search malaide
+	searchMaladieQuery = new Query(Criteria.where("nom").is("Chikungunya"));
+
+	// find the saved user again.
+	
+        Maladie  m3 =  mongoOperation.findOne(searchMaladieQuery, Maladie.class);
+        
+        System.out.println("Find maladie : " + m3);
+        
+        
+        
+        
        int  idm =(int)Double.parseDouble(m1.getId());
          // query to search user
 	Query searchMSQuery = new Query(Criteria.where("maladie._id").is(idm));
 
 	// find the saved user again.
-	/*
-        MaladieSymptomes  ms1 =  mongoOperation.findOne(searchMSQuery, MaladieSymptomes.class);
+
+/*        MaladieSymptomes  ms1 =  mongoOperation.findOne(searchMSQuery, MaladieSymptomes.class);
         
         System.out.println("Find maladieSymptomes : " + ms1);
         
@@ -113,11 +150,11 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         symps.add(s2);
         symps.add(s3);
         
-        
+        */
         
        GeoJsonPoint Location = new GeoJsonPoint (new Point( -72.30497360229492,18.5478128256271));
         Zone z1 = new Zone();
-       CasMaladie cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,z1);
+       CasMaladie cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,z1);
        
        // query to search demographie
 	Query searchDemoQuery = new Query(Criteria.where("geometry").intersects(Location));
@@ -139,7 +176,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         
       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -147,7 +184,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
        
       Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-10-14",Location.getCoordinates(),5,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),5,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -155,7 +192,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -163,7 +200,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -171,7 +208,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),4,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),4,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -180,7 +217,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
        Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -188,7 +225,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
        
       Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-10-14",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -196,7 +233,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -204,7 +241,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -212,7 +249,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),2,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),2,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -221,7 +258,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
        Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -229,7 +266,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
        
       Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-10-14",Location.getCoordinates(),4,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),4,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -237,7 +274,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -245,7 +282,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),5,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),5,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -253,7 +290,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -262,7 +299,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
        Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -270,7 +307,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
        
       Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-10-14",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -278,7 +315,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -286,7 +323,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -294,7 +331,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),4,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),4,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -302,7 +339,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
        Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -310,7 +347,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
        
       Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-10-14",Location.getCoordinates(),4,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),4,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -318,7 +355,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -326,7 +363,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -334,7 +371,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),0,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),0,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -342,7 +379,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
        Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -350,7 +387,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
        
       Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-10-14",Location.getCoordinates(),1,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),1,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -358,7 +395,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -366,7 +403,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),2,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),2,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
@@ -374,12 +411,529 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
        
-      cas = new CasMaladie(m1,symps,savedUser,"2015-12-24",Location.getCoordinates(),5,null);
+      cas = new CasMaladie(m1,m1.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),5,null);
       demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
       cas.setZone(Zonage.getZoneFromDemographie(demogSave));
       // save casMaladie
       mongoOperation.save(cas);  
-      */
+      
+      
+      
+      
+      
+      
+      
+      
+      
+          //--------------------------------------------- Cas Maladie adding part 2 
+        
+      Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m1,m2.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),5,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      //--------------------------------------------------
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),2,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),5,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),0,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),1,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),2,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m2,m2.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),5,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+          //--------------------------------------------- Cas Maladie adding  part 3
+        
+      Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),5,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      //--------------------------------------------------
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),2,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),5,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),4,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),0,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+       Location = new GeoJsonPoint (new Point( -72.39166259765625,18.794517898837615));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-28",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+       
+      Location = new GeoJsonPoint (new Point( -72.08129882812499,18.276302250871954));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-10-14",Location.getCoordinates(),1,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point( -73.88031005859375,18.101476387775914));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-11-20",Location.getCoordinates(),3,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      Location = new GeoJsonPoint (new Point(-73.93524169921875,18.534304453676864));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),2,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas); 
+      
+      Location = new GeoJsonPoint (new Point(-71.7901611328125,18.80231812168813));
+       
+      cas = new CasMaladie(m3,m3.getSymptomes(),savedUser,"2015-12-24",Location.getCoordinates(),5,null);
+      demogSave = mongoOperation.findOne(searchDemoQuery, Demographie.class); 
+      cas.setZone(Zonage.getZoneFromDemographie(demogSave));
+      // save casMaladie
+      mongoOperation.save(cas);  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
     }
 
     @Override
@@ -468,9 +1022,71 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
     }
     
     
+    @Override
+     public Map<String,DemographieValue> getDemographieByDepartement(){
+        
+      //Query query = new Query(where("maladie.$id").is("1"));
+      MapReduceResults<DemographieValue> results = mongoOperation.mapReduce("geo_section_demographie", "classpath:/js/MapDepartement.js", "classpath:/js/ReduceDepartement.js", DemographieValue.class);
+    Map<String,DemographieValue> listDemographieValueMRs= new HashMap<String,DemographieValue>();
+    for (DemographieValue valueObject : results) {
+        System.out.println(valueObject);
+        listDemographieValueMRs.put(valueObject.get_id().toLowerCase().replaceFirst(" ", "-"),valueObject);
+    }  
+       return listDemographieValueMRs ;
+    }
+         
+         
+     
+     @Override
+     public Map<String,DemographieValue> getDemographieByCommune(){
+        
+      //Query query = new Query(where("maladie.$id").is("1"));
+      MapReduceResults<DemographieValue> results = mongoOperation.mapReduce("geo_section_demographie", "classpath:/js/MapCommune.js", "classpath:/js/ReduceCommune.js", DemographieValue.class);
+    Map<String,DemographieValue> listDemographieValueMRs= new HashMap<String,DemographieValue>();
+    for (DemographieValue valueObject : results) {
+        System.out.println(valueObject);
+        listDemographieValueMRs.put(valueObject.get_id().toLowerCase(),valueObject);
+    }  
+       return listDemographieValueMRs ;
+    }
+         
+         
     
+     
+     
+     
+     
+      @Override
+    public List<Demographie> getSectionCommunaleDemographieCM(long idMaladie){
     
+      List<Demographie> listCommune= demographietRepo.findAll();
     
+      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_SectionCommunale(idMaladie);
+    
+       Map<String,DemographieValue> listDemographieValueMRs= demographietRepo.getDemographieByCommune();
+    
+    for (Demographie sec : listCommune) {
+       
+        String StrCommune = sec.getProperties().getSection().toLowerCase();
+        
+        //listCasMaladieMRs.get(StrDepartement);
+        //listDemographieValueMRs.get(StrDepartement);
+        
+        if(listCasMaladieMRs.containsKey(StrCommune)){
+        sec.getProperties().setCasMaladieValue(listCasMaladieMRs.get(StrCommune).getValue());
+        }
+        else
+        {
+           sec.getProperties().setCasMaladieValue(null);   
+        }
+        
+        
+    } 
+       return listCommune ;
+    }
+    
+     
+     
     
     
 }
