@@ -6,7 +6,9 @@
 package ht.mbds.haiti.rase.model.repository;
 
 import ht.mbds.haiti.rase.model.model.Departement;
+import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieValue;
 import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +31,14 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
     @Autowired private DepartementRepository departementRepo;
     @Autowired private DemographieRepository demographietRepo;
     
+     @Autowired private MaladieRepository maladieRepo;
+    
     @Override
     public List<Departement> getDepartementDemographieCM(Long idMaldie){
     
       List<Departement> listDepartement= departementRepo.findAll();
+      
+      Maladie maladieRecherche = maladieRepo.findOne(idMaldie.toString());
     
       Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_Departement(idMaldie);
     
@@ -50,7 +56,11 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
         }
         else
         {
-           dep.getProperties().setCasMaladieValue(null);   
+            CasMaladieValue cmv = new CasMaladieValue();
+            cmv.setCount(0);
+            cmv.setMaladie(maladieRecherche);
+            cmv.set_id(StrDepartement);
+           dep.getProperties().setCasMaladieValue(cmv);   
         }
         
         if(listDemographieValueMRs.containsKey(StrDepartement))

@@ -38,7 +38,7 @@ public class CasMaladieRepositoryImpl implements CasMaladieRepositoryCostum {
     
     
     
-       @Override
+    @Override
     public Map<String,CasMaladieMR> getCasMaladieMR_Commune(Long idMaldie){
       Query query = new Query(where("maladie.$id").is("1"));
       MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieCommune.js", "classpath:/js/ReduceCasMaladieCommune.js", CasMaladieMR.class);

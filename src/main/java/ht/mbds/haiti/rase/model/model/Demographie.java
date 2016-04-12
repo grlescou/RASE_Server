@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.geo.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "demographie")
+@Document(collection = "geo_section_demographie")
 public class Demographie implements Serializable 
 {
     @Id

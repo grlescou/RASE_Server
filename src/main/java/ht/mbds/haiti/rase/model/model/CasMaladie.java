@@ -31,7 +31,7 @@ public class CasMaladie  implements Serializable
      @DBRef
     private List<Symptome> listeSymptome;
      @DBRef
-    private User user;
+    private PersonnelSante user ;
      
     private String date;
     
@@ -47,7 +47,7 @@ public class CasMaladie  implements Serializable
     }
     
     @JsonCreator
-    public CasMaladie( @JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  User user, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("zone") Zone zone) {
+    public CasMaladie( @JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  PersonnelSante user, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("zone") Zone zone) {
         this.maladie = maladie;
         this.listeSymptome = listeSymptome;
         this.user = user;
@@ -64,12 +64,12 @@ public class CasMaladie  implements Serializable
     }
     
 
-    public User getUser ()
+    public PersonnelSante getUser ()
     {
         return user;
     }
 
-    public void setUser (User User)
+    public void setUser (PersonnelSante User)
     {
         this.user = User;
     }

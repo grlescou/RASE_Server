@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/v1/demographie")
+@RequestMapping(value="/v1/")
 public class DemographieController {
     
     @Autowired private DemographieService demographieService;
@@ -47,12 +47,12 @@ public class DemographieController {
      @Autowired private CommuneService communeService;
        @Autowired private SectionCommunaleService sectionCommunaleService;
     
-    @RequestMapping(method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
+    @RequestMapping(value="demographie",method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
     public Demographie[] getDemographieArray() {
         return demographieService.findDemographieAll().toArray(new Demographie[]{});
     }
     
-     @RequestMapping(value="/{x}/{y}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+     @RequestMapping(value="demographie/{x}/{y}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
     public Demographie getDemographieByGeomIntersectPoint(@PathVariable("x") Double x ,@PathVariable("y") Double y) {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
         
@@ -74,7 +74,7 @@ public class DemographieController {
 //    }
 //    
     
-      @RequestMapping(value="/map/departement/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      @RequestMapping(value="/departement/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
       public List<Departement> getDepartementDemographieCM(@PathVariable("id") long idMaladie )
  {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
@@ -85,9 +85,9 @@ public class DemographieController {
     }
     
     
-      @RequestMapping(value="/map/commune/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      @RequestMapping(value="/commune/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
       public List<Commune> getCommuneDemographieCM(@PathVariable("id") long idMaladie )
- {     
+    {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
         
       
@@ -95,7 +95,7 @@ public class DemographieController {
         
     }
       
-   @RequestMapping(value="/map/sectionCommunale/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+   @RequestMapping(value="/sectionCommunale/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
       public List<Demographie> getSectionCommunaleDemographieCM(@PathVariable("id") long idMaladie )
  {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));

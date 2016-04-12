@@ -12,50 +12,50 @@ import java.io.Serializable;
  * @author gaetan
  */
 public class PopulationValue implements Serializable {
-    private String moins_5an;
+    private long moins_5an;
 
-    private String femmes;
+    private long femmes;
 
-    private String hommes;
+    private long hommes;
 
-    private String population;
+    private long population;
 
-    public String getMoins_5an ()
+    public long getMoins_5an ()
     {
         return moins_5an;
     }
 
-    public void setMoins_5an (String moins_5an)
+    public void setMoins_5an (long moins_5an)
     {
         this.moins_5an = moins_5an;
     }
 
-    public String getFemmes ()
+    public long getFemmes ()
     {
         return femmes;
     }
 
-    public void setFemmes (String femmes)
+    public void setFemmes (long femmes)
     {
         this.femmes = femmes;
     }
 
-    public String getHommes ()
+    public long getHommes ()
     {
         return hommes;
     }
 
-    public void setHommes (String hommes)
+    public void setHommes (long hommes)
     {
         this.hommes = hommes;
     }
 
-    public String getPopulation ()
+    public long getPopulation ()
     {
         return population;
     }
 
-    public void setPopulation (String population)
+    public void setPopulation (long population)
     {
         this.population = population;
     }

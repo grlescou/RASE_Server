@@ -65,8 +65,13 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         
         return  mongoOperation.findOne(searchDemoQuery, Demographie.class);
     }
+    
+    @Override
+    public void test() {
+        
+    }
 
-  
+  /*
 
     @Override
     public void test() {
@@ -80,9 +85,9 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
 	mongoOperation.save(pInfirmiere);
         
 
-	User user1 = new User("Jean","Pierre","jpierre@gamil.com","pass12345",pMedecin, new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),true,"192.168.1.1",false);
-        User user2 = new User("Carl","Preval","cpreval@gamil.com","abc12345",pMedecin,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),true,"192.168.1.1",false);
-        User user3 = new User("Jeanne","Lemoine","jLemoine@gamil.com","pass12345",pInfirmiere,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),true,"192.168.1.1",false);
+	PersonnelSante user1 = new PersonnelSante("Jean","Pierre","jpierre@gamil.com","pass12345", new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),true,"192.168.1.1",pMedecin,"EnCours");
+        Utilisateur user2 = new Utilisateur("Carl","Preval","cpreval@gamil.com","abc12345",pMedecin,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),true,"192.168.1.1",false);
+        Utilisateur user3 = new Utilisateur("Jeanne","Lemoine","jLemoine@gamil.com","pass12345",pInfirmiere,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),true,"192.168.1.1",false);
          // save
 	mongoOperation.save(user1);
          // save
@@ -137,7 +142,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
 
 	// find the saved user again.
 
-/*        MaladieSymptomes  ms1 =  mongoOperation.findOne(searchMSQuery, MaladieSymptomes.class);
+ comment----        MaladieSymptomes  ms1 =  mongoOperation.findOne(searchMSQuery, MaladieSymptomes.class);
         
         System.out.println("Find maladieSymptomes : " + ms1);
         
@@ -150,7 +155,7 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         symps.add(s2);
         symps.add(s3);
         
-        */
+       --- comment
         
        GeoJsonPoint Location = new GeoJsonPoint (new Point( -72.30497360229492,18.5478128256271));
         Zone z1 = new Zone();
@@ -935,6 +940,8 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
       
       
     }
+
+  */
 
     @Override
     public boolean createUtilisateur() {
