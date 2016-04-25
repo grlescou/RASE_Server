@@ -83,7 +83,7 @@ public class UtilisateurController {
         
         authUser= userService.findPersonneByMail(user.getMail());
         if (authUser == null){
-            messageBad = new Message<>(fail_message_utilisateur_auth,false,user); 
+            messageBad = new Message<AuthUtilisateur>(fail_message_utilisateur_auth,false,user); 
             return messageBad;
         }
         else{
@@ -91,11 +91,11 @@ public class UtilisateurController {
           if(authUser.getPassword().equals(user.getPassword())){
         authUser.setPassword("");
         
-         messageGood = new Message<>(success_message_utilisateur_auth,true,authUser);
+         messageGood = new Message<Personne>(success_message_utilisateur_auth,true,authUser);
          return messageGood;
           }
           else{
-             messageBad = new Message<>(fail_message_utilisateur_auth,false,user);
+             messageBad = new Message<AuthUtilisateur>(fail_message_utilisateur_auth,false,user);
              return messageBad;
           }
          
@@ -104,7 +104,7 @@ public class UtilisateurController {
         }
         }
         catch(Exception ex){
-             messageBad = new Message<>(fail_message_utilisateur_auth,false,user);
+             messageBad = new Message<AuthUtilisateur>(fail_message_utilisateur_auth,false,user);
              return messageBad;
         }
         

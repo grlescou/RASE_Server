@@ -23,7 +23,7 @@ public class Utilisateur extends Personne implements Serializable {
     
     
     @DBRef
-    private MentionResponsabilite mentionResposabilite;
+    private MentionResponsabilite mentionResponsabilite;
     
     // the coordinates must be stored in the longitude, latitude order
     private List<Double> dernierLocation;
@@ -36,17 +36,17 @@ public class Utilisateur extends Personne implements Serializable {
     @JsonCreator
     public Utilisateur(@JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("role") Role role, @JsonProperty("telephone") String telephone, @JsonProperty("adresse") Adresse adresse,  @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("mentionResposabilite") MentionResponsabilite mentionResposabilite,  @JsonProperty("dernierLocation")   List<Double> dernierLocation, @JsonProperty("status") String status) {
         super(prenom, nom, mail, password, role, telephone, adresse, actif, ip);
-        this.mentionResposabilite = mentionResposabilite;
+        this.mentionResponsabilite = mentionResposabilite;
         this.dernierLocation = dernierLocation;
         this.status = status;
     }
 
-    public MentionResponsabilite getMentionResposabilite() {
-        return mentionResposabilite;
+    public MentionResponsabilite getMentionResponsabilite() {
+        return mentionResponsabilite;
     }
 
-    public void setMentionResposabilite(MentionResponsabilite mentionResposabilite) {
-        this.mentionResposabilite = mentionResposabilite;
+    public void setMentionResponsabilite(MentionResponsabilite mentionResponsabilite) {
+        this.mentionResponsabilite = mentionResponsabilite;
     }
 
     

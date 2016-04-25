@@ -61,12 +61,12 @@ public class MentionResponsabiliteController {
         try
         {
              MentionResponsabilite savedMentionResponsabilite = mentionService.saveMentionResponsabilite(mention);
-             message= new Message<>(success_message_mention_create,true,savedMentionResponsabilite);
+             message= new Message<MentionResponsabilite>(success_message_mention_create,true,savedMentionResponsabilite);
              return message;
         }
         catch(Exception ex)
         {
-            message= new Message<>(fail_message_mention_create,false,null);
+            message= new Message<MentionResponsabilite>(fail_message_mention_create,false,null);
              return message;
         }
        

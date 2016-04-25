@@ -62,13 +62,13 @@ public class SymptomeController {
         try
         {
              Symptome savedSymptome = symptomeService.saveSymptome(symptome);
-             message= new Message<>(success_message_symptome_create,true,savedSymptome);
+             message= new Message<Symptome>(success_message_symptome_create,true,savedSymptome);
              return message;
              
         }
         catch(Exception ex)
         {
-            message= new Message<>(fail_message_symptome_create,true,null);
+            message= new Message<Symptome>(fail_message_symptome_create,true,null);
             return message;
         }
          

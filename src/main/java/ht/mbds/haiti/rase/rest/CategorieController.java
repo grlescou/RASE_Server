@@ -57,12 +57,12 @@ public class CategorieController {
         try
         {
             Categorie savedCategorie = categorieService.saveCategorie(categorie);
-            message = new Message<>(success_message_categorie_create,true,savedCategorie);
+            message = new Message<Categorie>(success_message_categorie_create,true,savedCategorie);
             return message;
         }
         catch(Exception ex)
         {
-            message = new Message<>(fail_message_categorie_create,false,null);
+            message = new Message<Categorie>(fail_message_categorie_create,false,null);
             return message;
         }
         

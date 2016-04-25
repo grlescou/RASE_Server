@@ -68,12 +68,12 @@ public class CasMaladieController {
         Zone zone = Zonage.getZoneFromDemographie(demog);
         casMaladie.setZone(zone);
         CasMaladie savedCasMaladie = casMaladieService.saveCasMaladie(casMaladie);
-        message = new Message<>(success_message_casMaladie_create,true,savedCasMaladie);
+        message = new Message<CasMaladie>(success_message_casMaladie_create,true,savedCasMaladie);
          return message;
         }
        catch(Exception ex)
        {
-           message = new Message<>(fail_message_casMaladie_create,false,null);
+           message = new Message<CasMaladie>(fail_message_casMaladie_create,false,null);
              return message;
        }
         

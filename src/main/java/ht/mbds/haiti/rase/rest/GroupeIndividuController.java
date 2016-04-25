@@ -53,12 +53,12 @@ public class GroupeIndividuController {
         try
         {
              GroupeIndividu savedGroupeIndividu = groupeIndividuService.saveGroupeIndividu(groupeIndividu);
-             message= new Message<>(success_message_groupeIndividu_create,true,savedGroupeIndividu);
+             message= new Message<GroupeIndividu>(success_message_groupeIndividu_create,true,savedGroupeIndividu);
              return message;
         }
         catch(Exception ex)
         {
-            message= new Message<>(fail_message_groupeIndividu_create,false,null);
+            message= new Message<GroupeIndividu>(fail_message_groupeIndividu_create,false,null);
              return message;
         }
        

@@ -55,12 +55,12 @@ public class ParametreController {
         try
         {
             Parametre savedParametre = parametreService.saveParametre(malaide);
-            message = new Message<>(success_message_parametre_create,true,savedParametre);
+            message = new Message<Parametre>(success_message_parametre_create,true,savedParametre);
             return message;
         }
         catch(Exception ex)
         {
-            message = new Message<>(fail_message_parametre_create,false,null);
+            message = new Message<Parametre>(fail_message_parametre_create,false,null);
             return message;
         }
         

@@ -60,12 +60,12 @@ public class MaladieController {
         try
         {
             Maladie savedMaladie = maladieService.saveMaladie(malaide);
-            message = new Message<>(success_message_maladie_create,true,savedMaladie);
+            message = new Message<Maladie>(success_message_maladie_create,true,savedMaladie);
             return message;
         }
         catch(Exception ex)
         {
-            message = new Message<>(fail_message_maladie_create,false,null);
+            message = new Message<Maladie>(fail_message_maladie_create,false,null);
             return message;
         }
         

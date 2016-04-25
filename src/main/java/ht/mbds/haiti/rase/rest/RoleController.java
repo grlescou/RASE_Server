@@ -53,12 +53,12 @@ public class RoleController {
         try
         {
              Role savedRole = roleService.saveRole(role);
-             message= new Message<>(success_message_role_create,true,savedRole);
+             message= new Message<Role>(success_message_role_create,true,savedRole);
              return message;
         }
         catch(Exception ex)
         {
-            message= new Message<>(fail_message_role_create,false,null);
+            message= new Message<Role>(fail_message_role_create,false,null);
              return message;
         }
        

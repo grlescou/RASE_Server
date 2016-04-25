@@ -55,12 +55,12 @@ public class SouscriptionController {
         try
         {
             Souscription savedSouscription = souscriptionService.saveSouscription(malaide);
-            message = new Message<>(success_message_souscription_create,true,savedSouscription);
+            message = new Message<Souscription>(success_message_souscription_create,true,savedSouscription);
             return message;
         }
         catch(Exception ex)
         {
-            message = new Message<>(fail_message_souscription_create,false,null);
+            message = new Message<Souscription>(fail_message_souscription_create,false,null);
             return message;
         }
         
