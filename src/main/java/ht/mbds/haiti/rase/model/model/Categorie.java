@@ -26,7 +26,7 @@ public class Categorie implements Serializable {
     private String description;
     
     @DBRef
-    private List<Maladie> listemaladie = new ArrayList<>();
+    private List<Maladie> listemaladie = new ArrayList<Maladie>();
 
     
     public Categorie() {

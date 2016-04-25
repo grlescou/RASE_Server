@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 @RestController
 @RequestMapping(value="/v1/casMaladie")

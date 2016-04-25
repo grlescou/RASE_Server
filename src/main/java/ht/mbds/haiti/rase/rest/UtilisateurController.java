@@ -6,7 +6,8 @@
 package ht.mbds.haiti.rase.rest;
 
 import ht.mbds.haiti.rase.model.model.Administrateur;
-import ht.mbds.haiti.rase.model.model.PersonnelSante;
+import ht.mbds.haiti.rase.model.model.Personne;
+import ht.mbds.haiti.rase.model.model.Personne;
 import ht.mbds.haiti.rase.model.model.Utilisateur;
 import ht.mbds.haiti.rase.model.model.utils.AuthUtilisateur;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 
 @RestController
@@ -49,37 +50,38 @@ public class UtilisateurController {
     static final String fail_message_utilisateur_auth = "Echec - utilisateur ou mot de passe incorrect";
     
     @Autowired private UtilisateurService userService;
-   
+  
+
     
-    @RequestMapping(value="/utilisateur",method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
-    public Utilisateur[] getUtilisateurArray() {
-        return userService.findUtilisateurAll().toArray(new Utilisateur[]{});
+    @RequestMapping(value="/personne",method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
+    public Personne[] getPersonneArray() {
+        return userService.findPersonneAll().toArray(new Personne[]{});
     }
     
-     @RequestMapping(value="/utilisateur/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Utilisateur getUtilisateurById(@PathVariable("Id") String Id) {     
-        Utilisateur user = userService.findUtilisateurById(Id) ;
+     @RequestMapping(value="/personne/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public Personne getPersonneById(@PathVariable("Id") String Id) {     
+        Personne user = userService.findPersonneById(Id) ;
    
         return user;
     }
     
-    @RequestMapping(value="/utilisateur/email/{email}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Utilisateur getUtilisateurByEmail(@PathVariable("email") String email) {     
-        Utilisateur user = userService.findUtilisateurByMail(email) ;
+    @RequestMapping(value="/personne/email/{email}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public Personne getPersonneByEmail(@PathVariable("email") String email) {     
+        Personne user = userService.findPersonneByMail(email) ;
         return user;
     }
     
-    // Authentification utilisateur
+    // Authentification personne
     
-    @RequestMapping(value="/utilisateur/auth",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
-    public Message createPersonnelSante(@Valid @RequestBody AuthUtilisateur user) {
-        Message<Utilisateur> messageGood = null;
+    @RequestMapping(value="/personne/auth",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
+    public Message createUtilisateur(@Valid @RequestBody AuthUtilisateur user) {
+        Message<Personne> messageGood = null;
          Message<AuthUtilisateur> messageBad = null;
-         Utilisateur authUser= null;
+         Personne authUser= null;
         try{
             
         
-        authUser= userService.findUtilisateurByMail(user.getMail());
+        authUser= userService.findPersonneByMail(user.getMail());
         if (authUser == null){
             messageBad = new Message<>(fail_message_utilisateur_auth,false,user); 
             return messageBad;
@@ -113,51 +115,51 @@ public class UtilisateurController {
     
     // section personnel sante 
     
-     @RequestMapping(value="/personnelSante",method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
-    public PersonnelSante[] getPersonnelSanteArray() {
-        return userService.findPersonnelSanteAll().toArray(new PersonnelSante[]{});
+     @RequestMapping(value="/utilisateur",method=RequestMethod.GET, produces=APPLICATION_JSON_VALUE)
+    public Utilisateur[] getUtilisateurArray() {
+        return userService.findUtilisateurAll().toArray(new Utilisateur[]{});
     }
     
-     @RequestMapping(value="/personnelSante/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public PersonnelSante getPersonnelSanteById(@PathVariable("Id") String Id) {     
-        PersonnelSante user = userService.findPersonnelSanteById(Id) ;
+     @RequestMapping(value="/utilisateur/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public Utilisateur getUtilisateurById(@PathVariable("Id") String Id) {     
+        Utilisateur user = userService.findUtilisateurById(Id) ;
       
         return user;
     }
     
-    @RequestMapping(value="/personnelSante/email/{email}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public PersonnelSante getPersonnelSanteByEmail(@PathVariable("email") String email) {     
-        PersonnelSante user = userService.findPersonnelSanteByMail(email) ;
+    @RequestMapping(value="/utilisateur/email/{email}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public Utilisateur getUtilisateurByEmail(@PathVariable("email") String email) {     
+        Utilisateur user = userService.findUtilisateurByMail(email) ;
         return user;
     }
     
-   @RequestMapping(value="/personnelSante",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
-    public Message<PersonnelSante> createPersonnelSante(@Valid @RequestBody PersonnelSante user) {
-        Message<PersonnelSante> message = null;
+   @RequestMapping(value="/utilisateur",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
+    public Message<Utilisateur> createUtilisateur(@Valid @RequestBody Utilisateur user) {
+        Message<Utilisateur> message = null;
         try{
         
-        PersonnelSante savedPersonnelSante = userService.savePersonnelSante(user);
-         message = new Message<>(success_message_utilisateur_create,true,savedPersonnelSante);
+        Utilisateur savedUtilisateur = userService.saveUtilisateur(user);
+         message = new Message<Utilisateur>(success_message_utilisateur_create,true,savedUtilisateur);
          return message;
         }
         catch(Exception ex){
-             message = new Message<>(fail_message_utilisateur_create,false,null);
+             message = new Message<Utilisateur>(fail_message_utilisateur_create,false,null);
              return message;
         }
         
     }
     
     
-    @RequestMapping(value="/personnelSante/{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
-    public SimpleMessage updatePersonnelSante(@PathVariable("Id") String userId,
-                              @RequestBody PersonnelSante user) { 
+    @RequestMapping(value="/utilisateur/{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
+    public SimpleMessage updateUtilisateur(@PathVariable("Id") String userId,
+                              @RequestBody Utilisateur user) { 
        
         //return user;
          SimpleMessage message = null;
         try{
         
         user.setId(userId);
-        userService.savePersonnelSante(user);
+        userService.saveUtilisateur(user);
          message = new SimpleMessage(success_message_utilisateur_update,true);
          return message;
         }
@@ -169,13 +171,13 @@ public class UtilisateurController {
         
     }
 
-    @RequestMapping(value="/personnelSante/{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
-    public SimpleMessage deletePersonnelSante(@PathVariable("Id") String userId) {
+    @RequestMapping(value="/utilisateur/{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
+    public SimpleMessage deleteUtilisateur(@PathVariable("Id") String userId) {
     
         SimpleMessage message = null;
         try{
         
-         userService.deletePersonnelSante(userId);
+         userService.deleteUtilisateur(userId);
          message = new SimpleMessage(success_message_utilisateur_delete,true);
          return message;
         }
@@ -189,86 +191,6 @@ public class UtilisateurController {
 
     
     
-    // section Administrateur
-    
-     @RequestMapping(value="/administrateur",method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Administrateur[] getAdministrateurArray() {
-        return userService.findAdministrateurAll().toArray(new Administrateur[]{});
-    }
-    
-     @RequestMapping(value="/administrateur/{Id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Administrateur getAdministrateurById(@PathVariable("Id") String Id) {     
-        Administrateur user = userService.findAdministrateurById(Id) ;
-      
-        return user;
-    }
-    
-    @RequestMapping(value="/administrateur/email/{email}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-    public Administrateur getAdministrateurByEmail(@PathVariable("email") String email) {     
-        Administrateur user = userService.findAdministrateurByMail(email) ;
-        return user;
-    }
-    
-   @RequestMapping(value="/administrateur",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE}, produces={APPLICATION_JSON_VALUE})
-    public Message<Administrateur> createAdministrateur(@Valid @RequestBody Administrateur user) {
-        Message<Administrateur> message = null;
-        try{
-        
-        Administrateur savedAdministrateur = userService.saveAdministrateur(user);
-         message = new Message<>(success_message_utilisateur_create,true,savedAdministrateur);
-         return message;
-        }
-        catch(Exception ex){
-             message = new Message<>(fail_message_utilisateur_create,false,null);
-             return message;
-        }
-        
-    }
-    
-    
-    @RequestMapping(value="/administrateur/{Id}", method=RequestMethod.PUT, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
-    public SimpleMessage updateAdministrateur(@PathVariable("Id") String userId,
-                              @RequestBody Administrateur user) { 
-       
-        //return user;
-         SimpleMessage message = null;
-        try{
-        
-        user.setId(userId);
-        userService.saveAdministrateur(user);
-         message = new SimpleMessage(success_message_utilisateur_update,true);
-         return message;
-        }
-        catch(Exception ex){
-             message = new SimpleMessage(fail_message_utilisateur_update,false);
-             return message;
-        }     
-    }
-
-    @RequestMapping(value="/administrateur/{Id}", method=RequestMethod.DELETE,produces={APPLICATION_JSON_VALUE})
-    public SimpleMessage deleteAdministrateur(@PathVariable("Id") String userId) {
-    
-        SimpleMessage message = null;
-        try{
-        Administrateur adm = userService.findAdministrateurById(userId);
-        
-        if (adm.getTypeAdmin().equals("Super-Admin")){
-             message = new SimpleMessage(fail_message_utilisateur_delete_Super,true);
-            return message;
-        }
-        
-         userService.deleteAdministrateur(userId);
-         message = new SimpleMessage(success_message_utilisateur_delete,true);
-         return message;
-        }
-        catch(Exception ex){
-             message = new SimpleMessage(fail_message_utilisateur_delete,false);
-             return message;
-        }
-        
-
-    }
-
     
     // @ResponseStatus(HttpStatus.NO_CONTENT)
    

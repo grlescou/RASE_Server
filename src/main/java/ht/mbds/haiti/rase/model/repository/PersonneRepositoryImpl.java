@@ -5,7 +5,7 @@
  */
 package ht.mbds.haiti.rase.model.repository;
 
-import ht.mbds.haiti.rase.model.model.Utilisateur;
+import ht.mbds.haiti.rase.model.model.Personne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 
@@ -13,12 +13,12 @@ import org.springframework.data.mongodb.core.MongoOperations;
  *
  * @author gaetan
  */
-public class UtilisateurRepositoryImpl implements UtilisateurRepositoryCostum {
+public class PersonneRepositoryImpl implements PersonneRepositoryCostum {
      @Autowired private MongoOperations mongoOperation ;
-     @Autowired private UtilisateurRepository utilisateurRepo;
+     @Autowired private PersonneRepository personneRepo;
     @Override
-    public Utilisateur desactiveUtilisateur(String id) {
-        Utilisateur UserTrouver = utilisateurRepo.findOne(id);
+    public Personne desactiveUtilisateur(String id) {
+        Personne UserTrouver = personneRepo.findOne(id);
         if (UserTrouver == null)
         {
             return null;

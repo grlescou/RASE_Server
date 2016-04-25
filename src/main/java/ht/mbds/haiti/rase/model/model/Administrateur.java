@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author gaetan
  */
 @Document(collection = "utilisateur")
-public class Administrateur extends Utilisateur implements Serializable {
+public class Administrateur extends Personne implements Serializable {
   
     private String typeAdmin;
 
@@ -23,7 +23,7 @@ public class Administrateur extends Utilisateur implements Serializable {
     }
 
      @JsonCreator
-    public Administrateur( @JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("role") String role, @JsonProperty("telephone") String telephone, @JsonProperty("adresse") Adresse adresse,  @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("typeAdmin") String typeAdmin) {
+    public Administrateur( @JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("role") Role role, @JsonProperty("telephone") String telephone, @JsonProperty("adresse") Adresse adresse,  @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("typeAdmin") String typeAdmin) {
         super(prenom, nom, mail, password, role, telephone, adresse, actif, ip);
         this.typeAdmin = typeAdmin;
     }

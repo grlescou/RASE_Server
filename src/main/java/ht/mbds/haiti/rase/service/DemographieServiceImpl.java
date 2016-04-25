@@ -6,8 +6,8 @@
 package ht.mbds.haiti.rase.service;
 
 import ht.mbds.haiti.rase.model.model.Demographie;
-import ht.mbds.haiti.rase.model.model.PersonnelSante;
 import ht.mbds.haiti.rase.model.model.Utilisateur;
+import ht.mbds.haiti.rase.model.model.Personne;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
 import ht.mbds.haiti.rase.model.repository.CasMaladieRepository;
 import ht.mbds.haiti.rase.model.repository.DemographieRepository;

@@ -5,13 +5,14 @@
  */
 package ht.mbds.haiti.rase.model.repository;
 
-import ht.mbds.haiti.rase.model.model.Profession;
+import ht.mbds.haiti.rase.model.model.Role;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
-public interface ProfessionRepository extends MongoRepository<Profession,String> {
-     public Profession findByNom(String nom);
+public interface RoleRepository extends MongoRepository<Role,String> {
+         public Role findByPrivilege (String privilege);
+
 }

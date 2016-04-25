@@ -7,7 +7,7 @@ package ht.mbds.haiti.rase.rest;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 
 import ht.mbds.haiti.rase.model.model.Maladie;

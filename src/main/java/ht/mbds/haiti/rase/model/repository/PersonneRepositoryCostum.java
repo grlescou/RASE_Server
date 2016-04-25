@@ -5,15 +5,15 @@
  */
 package ht.mbds.haiti.rase.model.repository;
 
-import ht.mbds.haiti.rase.model.model.Utilisateur;
+import ht.mbds.haiti.rase.model.model.Personne;
 
 /**
  *
  * @author gaetan
  */
-public interface UtilisateurRepositoryCostum {
+public interface PersonneRepositoryCostum {
     
-    public Utilisateur desactiveUtilisateur(String id);
+    public Personne desactiveUtilisateur(String id);
     
     
 }

@@ -31,7 +31,7 @@ public class User  implements Serializable
     private String mail;
     private String password;
     //private String role 
-    private Profession profession;
+    private MentionResponsabilite profession;
     //private String Telephone ;
     //private Adresse adresse ;
     
@@ -45,7 +45,7 @@ public class User  implements Serializable
     }
     
      @JsonCreator
-    public User(@JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("profession") Profession profession, @JsonProperty("dernierLocation")   List<Double> dernierLocation, @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("valider") boolean valider) {
+    public User(@JsonProperty("prenom") String prenom, @JsonProperty("nom") String nom, @JsonProperty("mail") String mail, @JsonProperty("password") String password, @JsonProperty("profession") MentionResponsabilite profession, @JsonProperty("dernierLocation")   List<Double> dernierLocation, @JsonProperty("actif") boolean actif, @JsonProperty("ip")  String ip, @JsonProperty("valider") boolean valider) {
         this.prenom = prenom;
         this.nom = nom;
         this.mail = mail;
@@ -57,7 +57,7 @@ public class User  implements Serializable
         this.valider = valider;
     }
 /*
-    public User(String _id, String prenom, String nom, String mail, String password, Profession profession, GeoJsonPoint DernierLocation, boolean actif, String ip, boolean valider) {
+    public User(String _id, String prenom, String nom, String mail, String password, MentionResponsabilite profession, GeoJsonPoint DernierLocation, boolean actif, String ip, boolean valider) {
         this.id = _id;
         this.prenom = prenom;
         this.nom = nom;
@@ -127,12 +127,12 @@ public class User  implements Serializable
 
    
 
-    public Profession getProfession ()
+    public MentionResponsabilite getProfession ()
     {
         return profession;
     }
 
-    public void setProfession (Profession profession)
+    public void setProfession (MentionResponsabilite profession)
     {
         this.profession = profession;
     }

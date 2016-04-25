@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 
 import org.springframework.data.mongodb.core.geo.*;
@@ -26,19 +26,24 @@ public class CasMaladie  implements Serializable
 {
     @Id
     private String id;
-     @DBRef
+    
     private Maladie maladie;
-     @DBRef
+    @DBRef
     private List<Symptome> listeSymptome;
-     @DBRef
-    private PersonnelSante user ;
+    @DBRef
+    private Utilisateur user ;
+    
+    private MentionResponsabilite mention; 
+    
+    private String sexe;
+    
+    private String groupeAge;
      
     private String date;
     
     // the coordinates must be stored in the longitude, latitude order
     private List<Double> location;
-
-    
+  
     private int note;
     
     private Zone zone;
@@ -47,10 +52,28 @@ public class CasMaladie  implements Serializable
     }
     
     @JsonCreator
-    public CasMaladie( @JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  PersonnelSante user, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("zone") Zone zone) {
+    public CasMaladie(@JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  Utilisateur user,@JsonProperty("mention") MentionResponsabilite mention,@JsonProperty("sexe") String sexe,@JsonProperty("groupeAge") String groupeAge, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("zone") Zone zone) {
+        
+        //this.categorie = new Categorie();
+        //this.categorie.setId( maladie.getCategorie().getId());
+       // this.categorie.setNom( maladie.getCategorie().getNom());
+        
+        //this.categorie.setDescription(null);
+        //this.categorie.setListemaladie(null);
+        
+        
+        maladie.setDescription(null);
+        maladie.setSymptomes(null);
         this.maladie = maladie;
+        
+        
         this.listeSymptome = listeSymptome;
         this.user = user;
+        
+        this.mention = mention;
+        this.sexe = sexe ;
+        this.groupeAge = groupeAge;
+        
         this.date = date;
         this.location = location;
         this.note = note;
@@ -64,12 +87,12 @@ public class CasMaladie  implements Serializable
     }
     
 
-    public PersonnelSante getUser ()
+    public Utilisateur getUser ()
     {
         return user;
     }
 
-    public void setUser (PersonnelSante User)
+    public void setUser (Utilisateur User)
     {
         this.user = User;
     }
@@ -142,6 +165,34 @@ public class CasMaladie  implements Serializable
     {
         this.zone = Zone;
     }
+
+    public MentionResponsabilite getMention() {
+        return mention;
+    }
+
+    public void setMention(MentionResponsabilite mention) {
+        this.mention = mention;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getGroupeAge() {
+        return groupeAge;
+    }
+
+    public void setGroupeAge(String groupeAge) {
+        this.groupeAge = groupeAge;
+    }
+    
+    
+    
+    
 
     @Override
     public String toString()

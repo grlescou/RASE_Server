@@ -15,32 +15,32 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
-@Document(collection = "profession")
-public class Profession implements Serializable 
+@Document(collection = "mention")
+public class MentionResponsabilite implements Serializable 
 {
     @Id 
     private String id;
     private String nom;
     private String description;
+    private GroupeIndividu groupeIndividu;
 
-   
-
-    public Profession() {
+    public MentionResponsabilite() {
     }
 
     /*
-    public Profession(String id, String nom, String description) {
+    public MentionResponsabilite(String id, String nom, String description) {
         this.id = id;
         this.description = description;
         this.nom = nom;
     }
 */
     @JsonCreator
-    public Profession(@JsonProperty("nom") String nom, @JsonProperty("description") String description) {
+    public MentionResponsabilite(@JsonProperty("nom") String nom, @JsonProperty("description") String description,@JsonProperty("groupeIndividu") GroupeIndividu groupeIndividu) {
         this.description = description;
         this.nom = nom;
+        this.groupeIndividu = groupeIndividu;
     }
 
     @JsonIgnore
@@ -77,9 +77,19 @@ public class Profession implements Serializable
         this.nom = nom;
     }
 
+    public GroupeIndividu getGroupeIndividu() {
+        return groupeIndividu;
+    }
+
+    public void setGroupeIndividu(GroupeIndividu groupeIndividu) {
+        this.groupeIndividu = groupeIndividu;
+    }
+    
+    
+
     @Override
     public String toString()
     {
-        return "Profession [_id = "+id+", description = "+description+", nom = "+nom+"]";
+        return "MentionResponsabilite [_id = "+id+", description = "+description+", nom = "+nom+"]";
     }
 }

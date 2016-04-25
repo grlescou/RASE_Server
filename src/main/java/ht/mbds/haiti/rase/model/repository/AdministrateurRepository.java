@@ -11,7 +11,7 @@ package ht.mbds.haiti.rase.model.repository;
  */
 
 import ht.mbds.haiti.rase.model.model.Administrateur;
-import ht.mbds.haiti.rase.model.model.PersonnelSante;
+import ht.mbds.haiti.rase.model.model.Utilisateur;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -19,5 +19,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface AdministrateurRepository extends MongoRepository<Administrateur,String>{
      public Administrateur findByMail (String mail);
-     public List<Administrateur> findByRole (String role);
+     public List<Administrateur> findByRolePrivilege (String role);
+     public List<Administrateur> findByRoleId (String id);
 }

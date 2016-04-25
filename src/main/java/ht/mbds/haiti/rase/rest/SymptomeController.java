@@ -27,7 +27,7 @@ import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
 /**
  *
- * @author MyPC
+ * @author gaetan
  */
 
 @RestController
