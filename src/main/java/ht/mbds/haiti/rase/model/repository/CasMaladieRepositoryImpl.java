@@ -26,8 +26,8 @@ public class CasMaladieRepositoryImpl implements CasMaladieRepositoryCostum {
       
     @Override
     public Map<String,CasMaladieMR> getCasMaladieMR_Departement(Long idMaldie){
-      Query query = new Query(where("maladie.$id").is("1"));
-      MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieDepartement.js", "classpath:/js/ReduceCasMaladieDepartement.js", CasMaladieMR.class);
+      Query query = new Query(where("maladie._id").is(idMaldie.toString()));
+      MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieDepartement.js", "classpath:/js/ReduceCasMaladie.js", CasMaladieMR.class);
     Map<String,CasMaladieMR> listCasMaladieMRs = new HashMap<String,CasMaladieMR>();
     for (CasMaladieMR valueObject : results) {
         System.out.println(valueObject);
@@ -40,8 +40,8 @@ public class CasMaladieRepositoryImpl implements CasMaladieRepositoryCostum {
     
     @Override
     public Map<String,CasMaladieMR> getCasMaladieMR_Commune(Long idMaldie){
-      Query query = new Query(where("maladie.$id").is("1"));
-      MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieCommune.js", "classpath:/js/ReduceCasMaladieCommune.js", CasMaladieMR.class);
+      Query query = new Query(where("maladie._id").is(idMaldie.toString()));
+      MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieCommune.js", "classpath:/js/ReduceCasMaladie.js", CasMaladieMR.class);
     Map<String,CasMaladieMR> listCasMaladieMRs = new HashMap<String,CasMaladieMR>();
     for (CasMaladieMR valueObject : results) {
         System.out.println(valueObject);
@@ -55,8 +55,8 @@ public class CasMaladieRepositoryImpl implements CasMaladieRepositoryCostum {
     
        @Override
     public Map<String,CasMaladieMR> getCasMaladieMR_SectionCommunale(Long idMaldie){
-      Query query = new Query(where("maladie.$id").is("1"));
-      MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieSectionCommunale.js", "classpath:/js/ReduceCasMaladieSectionCommunale.js", CasMaladieMR.class);
+      Query query = new Query(where("maladie._id").is(idMaldie.toString()));
+      MapReduceResults<CasMaladieMR> results = mongoOperation.mapReduce(query,"cas_maladie", "classpath:/js/MapCasMaladieSectionCommunale.js", "classpath:/js/ReduceCasMaladie.js", CasMaladieMR.class);
     Map<String,CasMaladieMR> listCasMaladieMRs = new HashMap<String,CasMaladieMR>();
     for (CasMaladieMR valueObject : results) {
         System.out.println(valueObject);

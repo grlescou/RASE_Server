@@ -35,9 +35,9 @@ public class CasMaladie  implements Serializable
     
     private MentionResponsabilite mention; 
     
-    private String sexe;
+    private String sexe; // {Femme,Homme,Mixe}
     
-    private String groupeAge;
+    private String groupeAge; // {Moins_de_5 ,Plus_de_5 }
      
     private String date;
     
@@ -46,13 +46,15 @@ public class CasMaladie  implements Serializable
   
     private int note;
     
+    private int nombreCas;
+    
     private Zone zone;
     
     public CasMaladie() {
     }
     
     @JsonCreator
-    public CasMaladie(@JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  Utilisateur user,@JsonProperty("mention") MentionResponsabilite mention,@JsonProperty("sexe") String sexe,@JsonProperty("groupeAge") String groupeAge, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("zone") Zone zone) {
+    public CasMaladie(@JsonProperty("maladie") Maladie maladie, @JsonProperty("listeSymptome") List<Symptome> listeSymptome,@JsonProperty("user")  Utilisateur user,@JsonProperty("mention") MentionResponsabilite mention,@JsonProperty("sexe") String sexe,@JsonProperty("groupeAge") String groupeAge, @JsonProperty("date")  String date, @JsonProperty("location") List<Double> location, @JsonProperty("note") int note, @JsonProperty("nombreCas") int nombreCas, @JsonProperty("zone") Zone zone) {
         
         //this.categorie = new Categorie();
         //this.categorie.setId( maladie.getCategorie().getId());
@@ -77,6 +79,7 @@ public class CasMaladie  implements Serializable
         this.date = date;
         this.location = location;
         this.note = note;
+        this.nombreCas = nombreCas;
         this.zone = zone;
     }
     
@@ -188,6 +191,14 @@ public class CasMaladie  implements Serializable
 
     public void setGroupeAge(String groupeAge) {
         this.groupeAge = groupeAge;
+    }
+
+    public int getNombreCas() {
+        return nombreCas;
+    }
+
+    public void setNombreCas(int nombreCas) {
+        this.nombreCas = nombreCas;
     }
     
     

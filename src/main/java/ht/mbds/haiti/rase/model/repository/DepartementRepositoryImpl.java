@@ -53,6 +53,7 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
         
         if(listCasMaladieMRs.containsKey(StrDepartement)){
         dep.getProperties().setCasMaladieValue(listCasMaladieMRs.get(StrDepartement).getValue());
+        System.out.println(listCasMaladieMRs.get(StrDepartement).getValue());
         }
         else
         {
@@ -61,6 +62,7 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
             cmv.setMaladie(maladieRecherche);
             cmv.set_id(StrDepartement);
            dep.getProperties().setCasMaladieValue(cmv);   
+            System.out.println(cmv);
         }
         
         if(listDemographieValueMRs.containsKey(StrDepartement))

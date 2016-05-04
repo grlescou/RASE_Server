@@ -6,7 +6,7 @@
 
 
  function Reduce (key, values) {
-                var outs={_id: null, maladie: null, count: 0};
+                var outs={_id: null, maladie: null, count: 0, hommes: 0, femmes:0, moins_5an: 0, mixe:0};
                 values.forEach(function(v){
                     if(v._id !== null){
                         outs._id = v._id;
