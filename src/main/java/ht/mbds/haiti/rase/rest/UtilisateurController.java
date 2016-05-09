@@ -71,17 +71,17 @@ public class UtilisateurController {
         return user;
     }
     
-    // Authentification personne
+    // Authentification Utilsateur
     
-    @RequestMapping(value="/personne/auth",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
+    @RequestMapping(value="/utilisateur/auth",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
     public Message createUtilisateur(@Valid @RequestBody AuthUtilisateur user) {
-        Message<Personne> messageGood = null;
+        Message<Utilisateur> messageGood = null;
          Message<AuthUtilisateur> messageBad = null;
-         Personne authUser= null;
+         Utilisateur authUser= null;
         try{
             
         
-        authUser= userService.findPersonneByMail(user.getMail());
+        authUser= userService.findUtilisateurByMail(user.getMail());
         if (authUser == null){
             messageBad = new Message<AuthUtilisateur>(fail_message_utilisateur_auth,false,user); 
             return messageBad;
@@ -91,7 +91,7 @@ public class UtilisateurController {
           if(authUser.getPassword().equals(user.getPassword())){
         authUser.setPassword("");
         
-         messageGood = new Message<Personne>(success_message_utilisateur_auth,true,authUser);
+         messageGood = new Message<Utilisateur>(success_message_utilisateur_auth,true,authUser);
          return messageGood;
           }
           else{

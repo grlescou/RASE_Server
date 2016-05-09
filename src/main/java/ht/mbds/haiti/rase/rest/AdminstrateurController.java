@@ -6,8 +6,9 @@
 package ht.mbds.haiti.rase.rest;
 
 import ht.mbds.haiti.rase.model.model.Administrateur;
+import ht.mbds.haiti.rase.model.model.utils.AuthUtilisateur;
 import ht.mbds.haiti.rase.service.AdministrateurService;
-import ht.mbds.haiti.rase.service.UtilisateurService;
+import ht.mbds.haiti.rase.service.AdministrateurService;
 import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
 import javax.validation.Valid;
@@ -123,6 +124,44 @@ public class AdminstrateurController {
     }
 
     
+     // Authentification Utilsateur
+    
+    @RequestMapping(value="/auth",method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE},produces={APPLICATION_JSON_VALUE})
+    public Message createAdministrateur(@Valid @RequestBody AuthUtilisateur user) {
+        Message<Administrateur> messageGood = null;
+         Message<AuthUtilisateur> messageBad = null;
+         Administrateur authUser= null;
+        try{
+            
+        
+        authUser= userService.findAdministrateurByMail(user.getMail());
+        if (authUser == null){
+            messageBad = new Message<AuthUtilisateur>(fail_message_administrateur_auth,false,user); 
+            return messageBad;
+        }
+        else{
+            
+          if(authUser.getPassword().equals(user.getPassword())){
+        authUser.setPassword("");
+        
+         messageGood = new Message<Administrateur>(success_message_administrateur_auth,true,authUser);
+         return messageGood;
+          }
+          else{
+             messageBad = new Message<AuthUtilisateur>(fail_message_administrateur_auth,false,user);
+             return messageBad;
+          }
+         
+         
+         
+        }
+        }
+        catch(Exception ex){
+             messageBad = new Message<AuthUtilisateur>(fail_message_administrateur_auth,false,user);
+             return messageBad;
+        }
+        
+    }
     
     
 }
