@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 
 
-public class PropertiesCommune  implements Serializable {
+public class ProprietesCommune  implements Serializable {
     
     private String ID_ADM2;
 
@@ -136,11 +136,18 @@ public class PropertiesCommune  implements Serializable {
     
     
 
+//    @Override
+//    public String toString()
+//    {
+//        return "ProprietesCommune [ID_ADM2 = "+ID_ADM2+", ID_ADM3 = "+ID_ADM3+", ID_ADM1 = "+ID_ADM1+", ADM1 = "+ADM1+", NOM_ADM3 = "+NOM_ADM3+", ADM2 = "+ADM2+", ADM3 = "+ADM3+", Shape_Leng = "+Shape_Leng+"]";
+//    }
+
     @Override
-    public String toString()
-    {
-        return "PropertiesCommune [ID_ADM2 = "+ID_ADM2+", ID_ADM3 = "+ID_ADM3+", ID_ADM1 = "+ID_ADM1+", ADM1 = "+ADM1+", NOM_ADM3 = "+NOM_ADM3+", ADM2 = "+ADM2+", ADM3 = "+ADM3+", Shape_Leng = "+Shape_Leng+"]";
+    public String toString() {
+        return "PropertiesCommune{" + "ID_ADM2=" + ID_ADM2 + ", ID_ADM3=" + ID_ADM3 + ", ID_ADM1=" + ID_ADM1 + ", ADM1=" + ADM1 + ", NOM_ADM3=" + NOM_ADM3 + ", ADM2=" + ADM2 + ", ADM3=" + ADM3 + ", Shape_Leng=" + Shape_Leng + ", casMaladieValue=" + casMaladieValue + ", demographieValue=" + demographieValue + '}';
     }
+    
+    
     
     
 }

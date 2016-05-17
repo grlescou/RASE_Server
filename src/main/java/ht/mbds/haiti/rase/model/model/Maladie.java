@@ -32,13 +32,13 @@ public class Maladie implements Serializable
     @DBRef
     private Categorie categorie;
     @DBRef
-    private List<Symptome> symptomes= new ArrayList<>();
+    private List<Symptome> symptomes= new ArrayList<Symptome>();
     
     public Maladie() {
     }
     
     @JsonCreator
-    public Maladie(@JsonProperty("nom") String nom, @JsonProperty("description") String description, @JsonProperty("seuil") int seuil,  @JsonProperty("typeSeuil") String typeSeuil,@JsonProperty("categorie") Categorie categorie) {
+    public Maladie(@JsonProperty("nom") String nom, @JsonProperty("description") String description, @JsonProperty("seuil") double seuil,  @JsonProperty("typeSeuil") String typeSeuil,@JsonProperty("categorie") Categorie categorie) {
         this.nom = nom;
         this.description = description;
         this.seuil = seuil;

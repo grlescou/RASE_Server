@@ -10,6 +10,7 @@ import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.model.model.Departement;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.model.utils.ListDepartement;
 import ht.mbds.haiti.rase.service.CommuneService;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import java.util.List;
@@ -104,6 +105,18 @@ public class DemographieController {
         return sectionCommunaleService.getSectionCommunale(idMaladie);
         
     }  
+      
+   @RequestMapping(value="/listdepartement/", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<ListDepartement> getListDepartement()
+ {     
+        //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
+        
+      
+        return departementService.getListDepartement();
+        
+    }   
+      
+      
      
 }
 
@@ -134,3 +147,5 @@ public class DemographieController {
     */
     
     
+
+ 

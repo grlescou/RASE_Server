@@ -7,7 +7,9 @@ package ht.mbds.haiti.rase.model.repository;
 
 import ht.mbds.haiti.rase.model.model.Commune;
 import ht.mbds.haiti.rase.model.model.Departement;
+import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieValue;
 import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
 import java.util.List;
 import java.util.Map;
@@ -26,10 +28,13 @@ public class CommuneRepositoryImpl implements CommuneRepositoryCostum {
     @Autowired private CommuneRepository communeRepo;
     @Autowired private DemographieRepository demographietRepo;
     
+    @Autowired private MaladieRepository maladieRepo;
+    
     @Override
-    public List<Commune> getCommuneDemographieCM(long idMaladie){
+    public List<Commune> getCommuneDemographieCM(Long idMaladie){
     
       List<Commune> listCommune= communeRepo.findAll();
+       Maladie maladieRecherche = maladieRepo.findOne(idMaladie.toString());
     
       Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_Commune(idMaladie);
     
@@ -44,10 +49,23 @@ public class CommuneRepositoryImpl implements CommuneRepositoryCostum {
         
         if(listCasMaladieMRs.containsKey(StrCommune)){
            com.getProperties().setCasMaladieValue(listCasMaladieMRs.get(StrCommune).getValue());
+           System.out.println("===x===="+listCasMaladieMRs.get(StrCommune).getValue());
         }
         else
         {
-           com.getProperties().setCasMaladieValue(null);   
+            CasMaladieValue cmv = new CasMaladieValue();
+            cmv.setCount(0);
+            cmv.setFemmes(0);
+            cmv.setHommes(0);
+            cmv.setMixe(0);
+            cmv.setMoins_5an(0);
+            maladieRecherche.setDescription(null);
+            cmv.setMaladie(maladieRecherche);
+            cmv.set_id(StrCommune);
+            com.getProperties().setCasMaladieValue(cmv);   
+            System.out.println("======="+cmv); 
+            
+          
         }
         
         if(listDemographieValueMRs.containsKey(StrCommune))

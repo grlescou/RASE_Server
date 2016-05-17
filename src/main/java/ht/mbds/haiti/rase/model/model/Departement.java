@@ -23,7 +23,7 @@ public class Departement  implements Serializable
     @Id 
     private String _id;
     
-    private PropertiesDepartement properties;
+    private ProprietesDepartement properties;
 
     private String type;
 
@@ -34,7 +34,7 @@ public class Departement  implements Serializable
     }
 
     
-    public Departement(String _id, PropertiesDepartement properties, String type, MultiGeometry geometry) {
+    public Departement(String _id, ProprietesDepartement properties, String type, MultiGeometry geometry) {
         this._id = _id;
         this.properties = properties;
         this.type = type;
@@ -59,12 +59,12 @@ public class Departement  implements Serializable
         this._id = _id;
     }
 
-    public PropertiesDepartement getProperties ()
+    public ProprietesDepartement getProperties ()
     {
         return properties;
     }
 
-    public void setProperties (PropertiesDepartement properties)
+    public void setProperties (ProprietesDepartement properties)
     {
         this.properties = properties;
     }

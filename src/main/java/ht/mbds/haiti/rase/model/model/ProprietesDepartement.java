@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * @author gaetan
  */
-public class PropertiesDepartement implements Serializable {
+public class ProprietesDepartement implements Serializable {
     
     private String ID_ADM1;
 

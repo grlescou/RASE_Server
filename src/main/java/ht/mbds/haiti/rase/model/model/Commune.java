@@ -21,7 +21,7 @@ public class Commune {
     @Id
     private String _id;
 
-    private PropertiesCommune properties;
+    private ProprietesCommune properties;
 
     private String type;
 
@@ -37,12 +37,12 @@ public class Commune {
         this._id = _id;
     }
 
-    public PropertiesCommune getProperties ()
+    public ProprietesCommune getProperties ()
     {
         return properties;
     }
 
-    public void setProperties (PropertiesCommune properties)
+    public void setProperties (ProprietesCommune properties)
     {
         this.properties = properties;
     }

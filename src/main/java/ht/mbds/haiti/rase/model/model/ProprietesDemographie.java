@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project PropertiesDemographie.
+ * To change this license header, choose License Headers in Project ProprietesDemographie.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -12,19 +12,19 @@ import java.io.Serializable;
  *
  * @author MyPC
  */
-public class PropertiesDemographie  implements Serializable 
+public class ProprietesDemographie  implements Serializable 
 {
-    private String OBJECTID_1;
+//    private String OBJECTID_1;
+//
+//    private String ID_COMMUNE;
+//
+//    private String ID_SECTION;
+//
+//    private String Count_;
 
-    private String ID_COMMUNE;
-
-    private String ID_SECTION;
-
-    private String Count_;
-
-    private String _ANS_ET;
-
-    private String AIRE_KM2;
+//    private String _ANS_ET;
+//
+//    private String AIRE_KM2;
 
     private String PROBLEMS;
 
@@ -32,67 +32,67 @@ public class PropertiesDemographie  implements Serializable
 
     private String HOMMES;
 
-    private String BATIMENTS;
-
-    private String AREA_KM;
-
-    private String AREA_RU_M;
+//    private String BATIMENTS;
+//
+//    private String AREA_KM;
+//
+//    private String AREA_RU_M;
 
     private String NOM_SECTIO;
 
-    private String POP_RU;
-
-    private String HOUSES_RU;
-
-    private String FAM_UTS_UR;
-
-    private String NO_DEP;
-
-    private String FID_1;
-
-    private String OBJECTID;
+//    private String POP_RU;
+//
+//    private String HOUSES_RU;
+//
+//    private String FAM_UTS_UR;
+//
+//    private String NO_DEP;
+//
+//    private String FID_1;
+//
+//    private String OBJECTID;
 
     private String DEPARTEMEN;
 
-    private String HOUSES_UR;
-
-    private String POP_UR;
-
-    private String UNIQ;
+//    private String HOUSES_UR;
+//
+//    private String POP_UR;
+//
+//    private String UNIQ;
 
     private String MOINS_5_AN;
 
-    private String FAM_UTS_RU;
-
-    private String AREA_UR_M;
-
-    private String AREA_RU_KM;
+//    private String FAM_UTS_RU;
+//
+//    private String AREA_UR_M;
+//
+//    private String AREA_RU_KM;
 
     private String Section;
 
-    private String EDITED;
-
-    private String NO_SECTION;
+//    private String EDITED;
+//
+//    private String NO_SECTION;
 
     private String FEMMES;
 
-    private String MENAGES;
-
-    private String AREA_UR_KM;
+//    private String MENAGES;
+//
+//    private String AREA_UR_KM;
 
     private String POPULATION;
 
-    private String POP_DENS;
-
-    private String ID_COMM;
-
-    private String OID_;
+//    private String POP_DENS;
+//
+//    private String ID_COMM;
+//
+//    private String OID_;
     
     
     private CasMaladieValue casMaladieValue;
     
     
-
+/*
     public String getOBJECTID_1 ()
     {
         return OBJECTID_1;
@@ -152,7 +152,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.AIRE_KM2 = AIRE_KM2;
     }
-
+*/
     public String getPROBLEMS ()
     {
         return PROBLEMS;
@@ -182,7 +182,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.HOMMES = HOMMES;
     }
-
+/*
     public String getBATIMENTS ()
     {
         return BATIMENTS;
@@ -212,7 +212,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.AREA_RU_M = AREA_RU_M;
     }
-
+*/
     public String getNOM_SECTIO ()
     {
         return NOM_SECTIO;
@@ -222,7 +222,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.NOM_SECTIO = NOM_SECTIO;
     }
-
+/*
     public String getPOP_RU ()
     {
         return POP_RU;
@@ -282,7 +282,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.OBJECTID = OBJECTID;
     }
-
+*/
     public String getDEPARTEMEN ()
     {
         return DEPARTEMEN;
@@ -292,7 +292,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.DEPARTEMEN = DEPARTEMEN;
     }
-
+/*
     public String getHOUSES_UR ()
     {
         return HOUSES_UR;
@@ -322,7 +322,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.UNIQ = UNIQ;
     }
-
+*/
     public String getMOINS_5_AN ()
     {
         return MOINS_5_AN;
@@ -332,7 +332,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.MOINS_5_AN = MOINS_5_AN;
     }
-
+/*
     public String getFAM_UTS_RU ()
     {
         return FAM_UTS_RU;
@@ -362,7 +362,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.AREA_RU_KM = AREA_RU_KM;
     }
-
+*/
     public String getSection ()
     {
         return Section;
@@ -372,7 +372,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.Section = Section;
     }
-
+/*
     public String getEDITED ()
     {
         return EDITED;
@@ -392,7 +392,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.NO_SECTION = NO_SECTION;
     }
-
+*/
     public String getFEMMES ()
     {
         return FEMMES;
@@ -402,7 +402,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.FEMMES = FEMMES;
     }
-
+/*
     public String getMENAGES ()
     {
         return MENAGES;
@@ -422,7 +422,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.AREA_UR_KM = AREA_UR_KM;
     }
-
+*/
     public String getPOPULATION ()
     {
         return POPULATION;
@@ -432,7 +432,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.POPULATION = POPULATION;
     }
-
+/*
     public String getPOP_DENS ()
     {
         return POP_DENS;
@@ -462,7 +462,7 @@ public class PropertiesDemographie  implements Serializable
     {
         this.OID_ = OID_;
     }
-    
+    */
     
      public CasMaladieValue getCasMaladieValue() {
         return casMaladieValue;
@@ -473,11 +473,19 @@ public class PropertiesDemographie  implements Serializable
     }
 
     
-
+/*
     @Override
     public String toString()
     {
-        return "PropertiesDemographie [OBJECTID_1 = "+OBJECTID_1+", ID_COMMUNE = "+ID_COMMUNE+", ID_SECTION = "+ID_SECTION+", Count_ = "+Count_+", _ANS_ET = "+_ANS_ET+", AIRE_KM2 = "+AIRE_KM2+", PROBLEMS = "+PROBLEMS+", COMMUNE = "+COMMUNE+", HOMMES = "+HOMMES+", BATIMENTS = "+BATIMENTS+", AREA_KM = "+AREA_KM+", AREA_RU_M = "+AREA_RU_M+", NOM_SECTIO = "+NOM_SECTIO+", POP_RU = "+POP_RU+", HOUSES_RU = "+HOUSES_RU+", FAM_UTS_UR = "+FAM_UTS_UR+", NO_DEP = "+NO_DEP+", FID_1 = "+FID_1+", OBJECTID = "+OBJECTID+", DEPARTEMEN = "+DEPARTEMEN+", HOUSES_UR = "+HOUSES_UR+", POP_UR = "+POP_UR+", UNIQ = "+UNIQ+", MOINS_5_AN = "+MOINS_5_AN+", FAM_UTS_RU = "+FAM_UTS_RU+", AREA_UR_M = "+AREA_UR_M+", AREA_RU_KM = "+AREA_RU_KM+", Section = "+Section+", EDITED = "+EDITED+", NO_SECTION = "+NO_SECTION+", FEMMES = "+FEMMES+", MENAGES = "+MENAGES+", AREA_UR_KM = "+AREA_UR_KM+", POPULATION = "+POPULATION+", POP_DENS = "+POP_DENS+", ID_COMM = "+ID_COMM+", OID_ = "+OID_+"]";
+        return "ProprietesDemographie [OBJECTID_1 = "+OBJECTID_1+", ID_COMMUNE = "+ID_COMMUNE+", ID_SECTION = "+ID_SECTION+", Count_ = "+Count_+", _ANS_ET = "+_ANS_ET+", AIRE_KM2 = "+AIRE_KM2+", PROBLEMS = "+PROBLEMS+", COMMUNE = "+COMMUNE+", HOMMES = "+HOMMES+", BATIMENTS = "+BATIMENTS+", AREA_KM = "+AREA_KM+", AREA_RU_M = "+AREA_RU_M+", NOM_SECTIO = "+NOM_SECTIO+", POP_RU = "+POP_RU+", HOUSES_RU = "+HOUSES_RU+", FAM_UTS_UR = "+FAM_UTS_UR+", NO_DEP = "+NO_DEP+", FID_1 = "+FID_1+", OBJECTID = "+OBJECTID+", DEPARTEMEN = "+DEPARTEMEN+", HOUSES_UR = "+HOUSES_UR+", POP_UR = "+POP_UR+", UNIQ = "+UNIQ+", MOINS_5_AN = "+MOINS_5_AN+", FAM_UTS_RU = "+FAM_UTS_RU+", AREA_UR_M = "+AREA_UR_M+", AREA_RU_KM = "+AREA_RU_KM+", Section = "+Section+", EDITED = "+EDITED+", NO_SECTION = "+NO_SECTION+", FEMMES = "+FEMMES+", MENAGES = "+MENAGES+", AREA_UR_KM = "+AREA_UR_KM+", POPULATION = "+POPULATION+", POP_DENS = "+POP_DENS+", ID_COMM = "+ID_COMM+", OID_ = "+OID_+"]";
     }
+*/
+
+    @Override
+    public String toString() {
+        return "PropertiesDemographie{" + "PROBLEMS=" + PROBLEMS + ", COMMUNE=" + COMMUNE + ", HOMMES=" + HOMMES + ", NOM_SECTIO=" + NOM_SECTIO + ", DEPARTEMEN=" + DEPARTEMEN + ", MOINS_5_AN=" + MOINS_5_AN + ", Section=" + Section + ", FEMMES=" + FEMMES + ", POPULATION=" + POPULATION + ", casMaladieValue=" + casMaladieValue + '}';
+    }
+    
+    
 }
 			

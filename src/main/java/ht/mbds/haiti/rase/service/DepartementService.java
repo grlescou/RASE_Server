@@ -6,6 +6,7 @@
 package ht.mbds.haiti.rase.service;
 
 import ht.mbds.haiti.rase.model.model.Departement;
+import ht.mbds.haiti.rase.model.model.utils.ListDepartement;
 import java.util.List;
 
 /**
@@ -16,5 +17,7 @@ public interface DepartementService {
     
     
     public List<Departement> getDepartement (long idMaladie);
+    
+    public List<ListDepartement> getListDepartement();
     
 }

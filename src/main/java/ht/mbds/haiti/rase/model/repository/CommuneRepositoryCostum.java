@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CommuneRepositoryCostum {
     
-     public List<Commune> getCommuneDemographieCM(long idMaladie);
+     public List<Commune> getCommuneDemographieCM(Long idMaladie);
   
     
     

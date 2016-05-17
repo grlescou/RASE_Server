@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project PropertiesDemographie.
+ * To change this license header, choose License Headers in Project ProprietesDemographie.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -23,6 +23,7 @@ import ht.mbds.haiti.rase.model.model.Personne;
 import ht.mbds.haiti.rase.model.model.Role;
 import ht.mbds.haiti.rase.model.model.Zone;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
+import ht.mbds.haiti.rase.model.model.utils.CasMaladieValue;
 import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
@@ -56,6 +57,8 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
     @Autowired private CasMaladieRepository casMaladieRepo;
     @Autowired private UtilisateurRepository utilisateurRepo;
     @Autowired private DemographieRepository demographietRepo;
+    
+    
     
     
     @Autowired private  GroupeIndividuRepository grouepRepo;
@@ -1106,10 +1109,12 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
      
      
      
-      @Override
-    public List<Demographie> getSectionCommunaleDemographieCM(long idMaladie){
+    @Override
+    public List<Demographie> getSectionCommunaleDemographieCM(Long idMaladie){
     
       List<Demographie> listCommune= demographietRepo.findAll();
+      
+        Maladie maladieRecherche = maladieRepo.findOne(idMaladie.toString());
     
       Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_SectionCommunale(idMaladie);
     
@@ -1127,7 +1132,23 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
         }
         else
         {
-           sec.getProperties().setCasMaladieValue(null);   
+          
+           
+           
+           CasMaladieValue cmv = new CasMaladieValue();
+            cmv.setCount(0);
+            cmv.setFemmes(0);
+            cmv.setHommes(0);
+            cmv.setMixe(0);
+            cmv.setMoins_5an(0);
+            maladieRecherche.setDescription(null);
+            cmv.setMaladie(maladieRecherche);
+            cmv.set_id(StrCommune);
+            sec.getProperties().setCasMaladieValue(cmv);   
+            System.out.println("======="+cmv); 
+           
+           
+           
         }
         
         

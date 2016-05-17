@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project PropertiesDemographie.
+ * To change this license header, choose License Headers in Project ProprietesDemographie.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -22,7 +22,7 @@ public class Demographie implements Serializable
     @Id
     private String id ;
     
-    private PropertiesDemographie properties;
+    private ProprietesDemographie properties;
 
     private String type;
 
@@ -31,7 +31,7 @@ public class Demographie implements Serializable
     public Demographie() {
     }
 
-    public Demographie(String _id, PropertiesDemographie properties, String type, Geometry geometry) {
+    public Demographie(String _id, ProprietesDemographie properties, String type, Geometry geometry) {
         this.id = _id;
         this.properties = properties;
         this.type = type;
@@ -47,12 +47,12 @@ public class Demographie implements Serializable
         this.id = _id;
     }
 
-    public PropertiesDemographie getProperties ()
+    public ProprietesDemographie getProperties ()
     {
         return properties;
     }
 
-    public void setProperties (PropertiesDemographie properties)
+    public void setProperties (ProprietesDemographie properties)
     {
         this.properties = properties;
     }

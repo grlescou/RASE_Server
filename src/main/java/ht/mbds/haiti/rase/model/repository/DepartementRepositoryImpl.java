@@ -5,20 +5,38 @@
  */
 package ht.mbds.haiti.rase.model.repository;
 
+import ht.mbds.haiti.rase.model.model.Demographie;
 import ht.mbds.haiti.rase.model.model.Departement;
 import ht.mbds.haiti.rase.model.model.Maladie;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
 import ht.mbds.haiti.rase.model.model.utils.CasMaladieValue;
 import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
+import ht.mbds.haiti.rase.model.model.utils.ListDepartement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import org.springframework.data.mongodb.core.query.Query;
+
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwind;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
+
+
 
 /**
  *
@@ -59,6 +77,10 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
         {
             CasMaladieValue cmv = new CasMaladieValue();
             cmv.setCount(0);
+            cmv.setFemmes(0);
+            cmv.setHommes(0);
+            cmv.setMixe(0);
+            cmv.setMoins_5an(0);
             cmv.setMaladie(maladieRecherche);
             cmv.set_id(StrDepartement);
            dep.getProperties().setCasMaladieValue(cmv);   
@@ -76,6 +98,20 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
         
     } 
        return listDepartement ;
+    }
+
+    @Override
+    public List<ListDepartement> getListDepartement() {
+        
+        Aggregation agg = newAggregation( project());
+        
+        AggregationResults<ListDepartement> groupeResults =  mongoOperation.aggregate(agg, Demographie.class,ListDepartement.class);
+      
+        List<ListDepartement> listDepartement =  groupeResults.getMappedResults();
+        
+        return listDepartement;
+       // return new ArrayList<ListDepartement>();
+       
     }
     
     

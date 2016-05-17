@@ -6,6 +6,7 @@
 package ht.mbds.haiti.rase.service;
 
 import ht.mbds.haiti.rase.model.model.Departement;
+import ht.mbds.haiti.rase.model.model.utils.ListDepartement;
 import ht.mbds.haiti.rase.model.repository.DemographieRepository;
 import ht.mbds.haiti.rase.model.repository.DepartementRepository;
 import java.util.List;
@@ -24,11 +25,20 @@ public class DepartementServiceImpl implements DepartementService {
     
     @Autowired private DepartementRepository departementRepository;
     
+    
     @Override
       public List<Departement> getDepartement (long idMaladie){
           
           return departementRepository.getDepartementDemographieCM(idMaladie);
           
       }
+
+    @Override
+    public List<ListDepartement> getListDepartement() {
+       return departementRepository.getListDepartement();
+    }
+      
+      
+      
     
 }

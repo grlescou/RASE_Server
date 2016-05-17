@@ -38,6 +38,6 @@ public interface DemographieRepositoryCostum {
    // par commune
     public Map<String,DemographieValue> getDemographieByCommune();
     
-     public List<Demographie> getSectionCommunaleDemographieCM(long idMaladie);
+     public List<Demographie> getSectionCommunaleDemographieCM(Long idMaladie);
    
 }
