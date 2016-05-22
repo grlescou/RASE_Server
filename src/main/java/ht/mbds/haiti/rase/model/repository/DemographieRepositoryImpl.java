@@ -5,6 +5,14 @@
  */
 package ht.mbds.haiti.rase.model.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+
+
+
 import ht.mbds.haiti.rase.model.model.Administrateur;
 import ht.mbds.haiti.rase.model.model.Adresse;
 import ht.mbds.haiti.rase.model.model.CasMaladie;
@@ -40,6 +48,23 @@ import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import org.springframework.data.mongodb.core.query.Query;
+
+
+
+
+import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonValue;
+import javax.json.JsonWriter;
+import javax.json.JsonObjectBuilder;
+import java.io.StringWriter;
+import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 /**
@@ -1157,7 +1182,80 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
     }
     
      
-     
+    @Override
+     public  HashMap<String,HashMap<String,List<String>>>  getDepartementCommuneSectionList(){
+           List<Demographie> listD= demographietRepo.findAll();
+           
+           HashMap<String,HashMap<String,List<String>>> listDCS = new HashMap<String,HashMap<String,List<String>>>();
+            
+           for ( Demographie el : listD){
+           
+           
+               if (listDCS.containsKey(el.getProperties().getDEPARTEMEN())){
+                   
+                if(  listDCS.get(el.getProperties().getDEPARTEMEN()).containsKey(el.getProperties().getCOMMUNE())   ){
+                    
+                    
+                     listDCS.get(el.getProperties().getDEPARTEMEN()).get(el.getProperties().getCOMMUNE()).add(el.getProperties().getSection());
+                    
+                    
+                    
+                }
+                else{
+                    List<String> section = new ArrayList<String>();
+                   section.add(el.getProperties().getSection());
+                   // HashMap<String,ArrayList<String>> commune =  new HashMap<String,ArrayList<String>>();
+                    //commune.put(el.getProperties().getCOMMUNE(), section );
+                      listDCS.get(el.getProperties().getDEPARTEMEN()).put(el.getProperties().getCOMMUNE(), section );
+                   // listDCS.put(el.getProperties().getDEPARTEMEN(), commune);
+                }
+                   
+                   
+               }
+               else{
+                   List<String> section = new ArrayList<String>();
+                   section.add(el.getProperties().getSection());
+                    HashMap<String,List<String>> commune =  new HashMap<String,List<String>>();
+                    commune.put(el.getProperties().getCOMMUNE(), section );
+                   
+                   listDCS.put(el.getProperties().getDEPARTEMEN(),commune );
+               }
+           
+           
+           
+           
+           
+             }
+           
+           /*
+           ObjectMapper mapper = new ObjectMapper();
+            String jsonStr = null;
+            //JsonObject jsonObj ;
+           
+        try {
+            jsonStr = mapper.writeValueAsString(listDCS);
+            
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(DemographieRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+       
+            
+        JsonObject jsonObj;
+        // Get the JsonObject structure from JsonReader.
+        try ( // Create JsonReader from Json.
+                JsonReader reader = Json.createReader(new StringReader(jsonStr))) {
+            // Get the JsonObject structure from JsonReader.
+            jsonObj = reader.readObject();
+            // We are done with the reader, let's close it.
+        }
+        
+         */
+           //listDCS.build();
+           //return jsonObj;
+           return listDCS;
+           
+     }
     
     
 }

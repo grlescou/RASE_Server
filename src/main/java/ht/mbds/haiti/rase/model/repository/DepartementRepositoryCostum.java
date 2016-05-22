@@ -8,6 +8,7 @@ package ht.mbds.haiti.rase.model.repository;
 import ht.mbds.haiti.rase.model.model.Departement;
 import ht.mbds.haiti.rase.model.model.utils.ListDepartement;
 import java.util.List;
+import javax.json.JsonObject;
 
 /**
  *
@@ -16,6 +17,6 @@ import java.util.List;
 public interface DepartementRepositoryCostum {
     
       public List<Departement> getDepartementDemographieCM(Long idMaldie); 
-      public List<ListDepartement> getListDepartement(); 
+//      public JsonObject getListDepartement(); 
     
 }

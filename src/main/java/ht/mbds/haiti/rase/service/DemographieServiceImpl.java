@@ -15,7 +15,9 @@ import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import javax.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
@@ -73,7 +75,11 @@ public class DemographieServiceImpl implements DemographieService {
 //    }
 //    
     
-    
+     @Override
+    public  HashMap<String,HashMap<String,List<String>>>  getDepartementCommuneSectionList() {
+       return  demographieRepository.getDepartementCommuneSectionList();
+    }
+      
     
     
 }

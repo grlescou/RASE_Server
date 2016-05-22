@@ -11,10 +11,14 @@ import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
 import ht.mbds.haiti.rase.model.model.utils.DemographieValue;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+
+
+ import javax.json.JsonObject;
 
 /**
  *
@@ -39,5 +43,7 @@ public interface DemographieRepositoryCostum {
     public Map<String,DemographieValue> getDemographieByCommune();
     
      public List<Demographie> getSectionCommunaleDemographieCM(Long idMaladie);
+     
+     public  HashMap<String,HashMap<String,List<String>>>  getDepartementCommuneSectionList();
    
 }

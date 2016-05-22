@@ -10,6 +10,7 @@ import ht.mbds.haiti.rase.model.model.utils.ListDepartement;
 import ht.mbds.haiti.rase.model.repository.DemographieRepository;
 import ht.mbds.haiti.rase.model.repository.DepartementRepository;
 import java.util.List;
+import javax.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,11 +34,7 @@ public class DepartementServiceImpl implements DepartementService {
           
       }
 
-    @Override
-    public List<ListDepartement> getListDepartement() {
-       return departementRepository.getListDepartement();
-    }
-      
+   
       
       
     

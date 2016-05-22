@@ -10,7 +10,9 @@ import ht.mbds.haiti.rase.model.model.utils.CasMaladieMR;
 import ht.mbds.haiti.rase.utils.GeoLocation;
 import ht.mbds.haiti.rase.utils.Message;
 import ht.mbds.haiti.rase.utils.SimpleMessage;
+import java.util.HashMap;
 import java.util.List;
+import javax.json.JsonObject;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
@@ -27,4 +29,6 @@ public interface DemographieService {
       public SimpleMessage createCategorie();
       
      // public List<CasMaladieMR> getCasMaladieMR(long idMaldie);
+      
+       public  HashMap<String,HashMap<String,List<String>>>  getDepartementCommuneSectionList();
 }

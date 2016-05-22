@@ -38,6 +38,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort
 
 
 
+
 /**
  *
  * @author gaetan
@@ -99,21 +100,21 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
     } 
        return listDepartement ;
     }
-
-    @Override
-    public List<ListDepartement> getListDepartement() {
-        
-        Aggregation agg = newAggregation( project());
-        
-        AggregationResults<ListDepartement> groupeResults =  mongoOperation.aggregate(agg, Demographie.class,ListDepartement.class);
-      
-        List<ListDepartement> listDepartement =  groupeResults.getMappedResults();
-        
-        return listDepartement;
-       // return new ArrayList<ListDepartement>();
-       
-    }
-    
+//
+//    @Override
+//    public JsonObject getListDepartement() {
+//        
+//        Aggregation agg = newAggregation( );
+//        
+//        AggregationResults<ListDepartement> groupeResults =  mongoOperation.aggregate(agg, Demographie.class,ListDepartement.class);
+//      
+//        List<ListDepartement> listDepartement =  groupeResults.getMappedResults();
+//        
+//        return listDepartement;
+//       // return new ArrayList<ListDepartement>();
+//       
+//    }
+//    
     
     
 }

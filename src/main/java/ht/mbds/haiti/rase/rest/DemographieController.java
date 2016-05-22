@@ -18,7 +18,9 @@ import java.util.List;
 import ht.mbds.haiti.rase.service.DemographieService;
 import ht.mbds.haiti.rase.service.DepartementService;
 import ht.mbds.haiti.rase.service.SectionCommunaleService;
+import java.util.HashMap;
 import java.util.logging.Logger;
+import javax.json.JsonObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
@@ -106,13 +108,13 @@ public class DemographieController {
         
     }  
       
-   @RequestMapping(value="/listdepartement/", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-      public List<ListDepartement> getListDepartement()
+   @RequestMapping(value="/zonelist/", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public  HashMap<String,HashMap<String,List<String>>>  getDepartementCommuneSectionList()
  {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
         
       
-        return departementService.getListDepartement();
+        return demographieService.getDepartementCommuneSectionList();
         
     }   
       

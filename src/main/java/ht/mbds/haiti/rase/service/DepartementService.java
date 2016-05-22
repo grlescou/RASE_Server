@@ -18,6 +18,6 @@ public interface DepartementService {
     
     public List<Departement> getDepartement (long idMaladie);
     
-    public List<ListDepartement> getListDepartement();
+   
     
 }
