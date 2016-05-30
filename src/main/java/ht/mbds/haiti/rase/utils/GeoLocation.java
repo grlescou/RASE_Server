@@ -80,7 +80,7 @@ public class GeoLocation {
     }
       
    public List<Double> getGeoCoordonatePoint (){
-       List<Double> point = new ArrayList<>();
+       List<Double> point = new ArrayList<Double>();
        point.add(x);
        point.add(y);
        
@@ -104,7 +104,7 @@ public class GeoLocation {
    } 
      
      public static List<Double> getGeoCoordonatePointFromGeoPoint (Point GPoint){
-       List<Double> point = new ArrayList<>();
+       List<Double> point = new ArrayList<Double>();
        point.add(GPoint.getX());
        point.add(GPoint.getY());
        
@@ -112,7 +112,7 @@ public class GeoLocation {
    }  
      
       public static List<Double> getGeoCoordonatePointFromXY (double x, double y){
-       List<Double> point = new ArrayList<>();
+       List<Double> point = new ArrayList<Double>();
        point.add(x);
        point.add(y);
        

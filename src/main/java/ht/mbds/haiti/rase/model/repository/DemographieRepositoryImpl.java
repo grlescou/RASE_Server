@@ -1031,9 +1031,9 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
          
         
         // Personnel de sante 
-	Utilisateur user1 = new Utilisateur("Jean","Pierre","jpierre@gamil.com","pass12345",roleUser,"50937695611",new Adresse(),true,"192.168.1.1",pMedecin, new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"En Cours");
-        Utilisateur user2 = new Utilisateur("Carl","Preval","cpreval@gamil.com","abc12345",roleUser,"50937898882",new Adresse(),true,"192.168.1.1",pMedecin,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"En Cours");
-        Utilisateur user3 = new Utilisateur("Jeanne","Lemoine","jLemoine@gamil.com","pass12345",roleUser,"50938694631",new Adresse(),true,"192.168.1.1",pInfirmiere,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"Accepter");
+	Utilisateur user1 = new Utilisateur("Jean","Pierre","jpierre@gamil.com","pass12345",roleUser,"50937695611",new Adresse(),true,"192.168.1.1",pMedecin, new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"En Cours",null);
+        Utilisateur user2 = new Utilisateur("Carl","Preval","cpreval@gamil.com","abc12345",roleUser,"50937898882",new Adresse(),true,"192.168.1.1",pMedecin,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"En Cours",null);
+        Utilisateur user3 = new Utilisateur("Jeanne","Lemoine","jLemoine@gamil.com","pass12345",roleUser,"50938694631",new Adresse(),true,"192.168.1.1",pInfirmiere,new GeoJsonPoint(-72.30497360229492,18.5478128256271).getCoordinates(),"Accepter",null);
          // save
 	mongoOperation.save(user1);
          // save
