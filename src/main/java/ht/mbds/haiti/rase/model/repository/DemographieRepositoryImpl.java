@@ -1135,13 +1135,13 @@ public class DemographieRepositoryImpl implements DemographieRepositoryCostum {
      
      
     @Override
-    public List<Demographie> getSectionCommunaleDemographieCM(Long idMaladie){
+    public List<Demographie> getSectionCommunaleDemographieCM(Long idMaladie, String dateDebut,String dateFin, String Mention, int note){
     
       List<Demographie> listCommune= demographietRepo.findAll();
       
         Maladie maladieRecherche = maladieRepo.findOne(idMaladie.toString());
     
-      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_SectionCommunale(idMaladie);
+      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_SectionCommunale(idMaladie,dateDebut,dateFin,Mention,note);
     
        Map<String,DemographieValue> listDemographieValueMRs= demographietRepo.getDemographieByCommune();
     

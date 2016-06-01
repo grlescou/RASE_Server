@@ -28,9 +28,9 @@ public class DepartementServiceImpl implements DepartementService {
     
     
     @Override
-      public List<Departement> getDepartement (long idMaladie){
+      public List<Departement> getDepartement (long  idMaldie, String dateDebut,String dateFin, String Mention, int note ){
           
-          return departementRepository.getDepartementDemographieCM(idMaladie);
+          return departementRepository.getDepartementDemographieCM(idMaldie, dateDebut,dateFin,Mention,note);
           
       }
 

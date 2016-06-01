@@ -77,34 +77,34 @@ public class DemographieController {
 //    }
 //    
     
-      @RequestMapping(value="/departement/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-      public List<Departement> getDepartementDemographieCM(@PathVariable("id") long idMaladie )
+      @RequestMapping(value="/departement/{id}/{dateDebut}/{dateFin}/{Mention}/{note}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<Departement> getDepartementDemographieCM(@PathVariable("id") long idMaladie, @PathVariable("dateDebut") String dateDebut, @PathVariable("dateFin") String dateFin, @PathVariable("Mention") String Mention, @PathVariable("note") long note )
  {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
-        
+        //int noteInt = Integer.parseInt(note);
       
-        return departementService.getDepartement(idMaladie);
+        return departementService.getDepartement(idMaladie,dateDebut,dateFin,Mention,(int)note);
         
     }
     
     
-      @RequestMapping(value="/commune/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-      public List<Commune> getCommuneDemographieCM(@PathVariable("id") long idMaladie )
+      @RequestMapping(value="/commune/{id}/{dateDebut}/{dateFin}/{Mention}/{note}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<Commune> getCommuneDemographieCM(@PathVariable("id") long idMaladie, @PathVariable("dateDebut") String dateDebut, @PathVariable("dateFin") String dateFin, @PathVariable("Mention") String Mention, @PathVariable("note") long note  )
     {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
         
       
-        return communeService.getCommune(idMaladie);
+        return communeService.getCommune(idMaladie,dateDebut,dateFin,Mention,(int)note);
         
     }
       
-   @RequestMapping(value="/sectionCommunale/{id}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
-      public List<Demographie> getSectionCommunaleDemographieCM(@PathVariable("id") long idMaladie )
+   @RequestMapping(value="/sectionCommunale/{id}/{dateDebut}/{dateFin}/{Mention}/{note}", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+      public List<Demographie> getSectionCommunaleDemographieCM(@PathVariable("id") long idMaladie, @PathVariable("dateDebut") String dateDebut, @PathVariable("dateFin") String dateFin, @PathVariable("Mention") String Mention, @PathVariable("note") long note  )
  {     
         //Demographie demographie = demographieService.getDemographieByGeomIntersectPoint(new GeoLocation(-72.30497360229492,18.5478128256271));
         
       
-        return sectionCommunaleService.getSectionCommunale(idMaladie);
+        return sectionCommunaleService.getSectionCommunale(idMaladie,dateDebut,dateFin,Mention,(int)note);
         
     }  
       

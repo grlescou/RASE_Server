@@ -11,12 +11,20 @@ package ht.mbds.haiti.rase.config.app;
  */
 
 
+import ht.mbds.haiti.rase.job.JobDetection;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
+@EnableScheduling
 @ComponentScan(basePackageClasses={AppConfig.class})
 public class AppConfig {
+    
+    @Bean
+    public JobDetection beanDectection() {
+        return new JobDetection();
+    }
 
 }

@@ -31,12 +31,12 @@ public class CommuneRepositoryImpl implements CommuneRepositoryCostum {
     @Autowired private MaladieRepository maladieRepo;
     
     @Override
-    public List<Commune> getCommuneDemographieCM(Long idMaladie){
+    public List<Commune> getCommuneDemographieCM(Long idMaladie, String dateDebut,String dateFin, String Mention, int note ){
     
       List<Commune> listCommune= communeRepo.findAll();
        Maladie maladieRecherche = maladieRepo.findOne(idMaladie.toString());
     
-      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_Commune(idMaladie);
+      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_Commune(idMaladie,dateDebut,dateFin,Mention,note);
     
        Map<String,DemographieValue> listDemographieValueMRs= demographietRepo.getDemographieByCommune();
     

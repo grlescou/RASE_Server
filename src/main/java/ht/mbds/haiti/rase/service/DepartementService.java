@@ -16,7 +16,7 @@ import java.util.List;
 public interface DepartementService {
     
     
-    public List<Departement> getDepartement (long idMaladie);
+    public List<Departement> getDepartement (long  idMaldie, String dateDebut,String dateFin, String Mention, int note);
     
    
     

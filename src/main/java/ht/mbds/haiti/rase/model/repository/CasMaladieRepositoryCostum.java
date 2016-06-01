@@ -18,11 +18,11 @@ public interface CasMaladieRepositoryCostum {
   // MapReduce and groupe
    
    
-   public Map<String,CasMaladieMR> getCasMaladieMR_Departement(Long idMaldie);
+   public Map<String,CasMaladieMR> getCasMaladieMR_Departement(Long idMaldie, String dateDebut,String dateFin, String Mention, int note);
    
-    public Map<String,CasMaladieMR> getCasMaladieMR_Commune(Long idMaldie);
+    public Map<String,CasMaladieMR> getCasMaladieMR_Commune(Long idMaldie, String dateDebut,String dateFin, String Mention, int note);
     
-    public Map<String,CasMaladieMR> getCasMaladieMR_SectionCommunale(Long idMaldie);
+    public Map<String,CasMaladieMR> getCasMaladieMR_SectionCommunale(Long idMaldie, String dateDebut,String dateFin, String Mention, int note);
      
     
 }

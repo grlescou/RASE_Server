@@ -63,7 +63,7 @@ public class CasMaladieController {
        Message<CasMaladie> message=null;
        try
         {
-           GeoLocation location = new GeoLocation(casMaladie.getLocation());
+        GeoLocation location = new GeoLocation(casMaladie.getLocation());
         Demographie demog =demographieService.getDemographieByGeomIntersectPoint(location);
         Zone zone = Zonage.getZoneFromDemographie(demog);
         casMaladie.setZone(zone);

@@ -26,8 +26,8 @@ public class SectionCommunaleServiceImpl implements SectionCommunaleService{
     @Autowired private DemographieRepository demographieRepository;
     
     @Override
-     public List<Demographie> getSectionCommunale (long idMaladie){
-         return  demographieRepository.getSectionCommunaleDemographieCM(idMaladie);
+     public List<Demographie> getSectionCommunale (long  idMaldie, String dateDebut,String dateFin, String Mention, int note){
+         return  demographieRepository.getSectionCommunaleDemographieCM(idMaldie, dateDebut,dateFin,Mention,note);
      }
     
      

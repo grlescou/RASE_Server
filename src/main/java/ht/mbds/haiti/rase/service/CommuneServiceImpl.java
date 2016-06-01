@@ -26,9 +26,9 @@ public class CommuneServiceImpl implements CommuneService {
      @Autowired private CommuneRepository communeRepository;
      
      @Override
-      public List<Commune> getCommune (long idMaladie){
+      public List<Commune> getCommune (long  idMaldie, String dateDebut,String dateFin, String Mention, int note ){
           
-          return communeRepository.getCommuneDemographieCM(idMaladie);
+          return communeRepository.getCommuneDemographieCM(idMaldie, dateDebut,dateFin,Mention,note);
           
       }
     

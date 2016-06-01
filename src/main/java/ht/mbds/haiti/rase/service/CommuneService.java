@@ -13,5 +13,5 @@ import java.util.List;
  * @author gaetan
  */
 public interface CommuneService {
-    public List<Commune> getCommune (long idMaladie); 
+    public List<Commune> getCommune (long  idMaldie, String dateDebut,String dateFin, String Mention, int note); 
 }

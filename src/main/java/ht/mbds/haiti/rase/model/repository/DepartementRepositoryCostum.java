@@ -16,7 +16,7 @@ import javax.json.JsonObject;
  */
 public interface DepartementRepositoryCostum {
     
-      public List<Departement> getDepartementDemographieCM(Long idMaldie); 
+      public List<Departement> getDepartementDemographieCM(Long idMaldie, String dateDebut,String dateFin, String Mention, int note ); 
 //      public JsonObject getListDepartement(); 
     
 }

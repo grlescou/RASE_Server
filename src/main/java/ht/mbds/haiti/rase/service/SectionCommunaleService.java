@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface SectionCommunaleService {
     
-      public List<Demographie> getSectionCommunale (long idMaladie); 
+      public List<Demographie> getSectionCommunale (long  idMaldie, String dateDebut,String dateFin, String Mention, int note); 
     
 }

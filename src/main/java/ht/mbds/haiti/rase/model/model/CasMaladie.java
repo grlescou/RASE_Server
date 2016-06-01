@@ -8,7 +8,9 @@ package ht.mbds.haiti.rase.model.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ht.mbds.haiti.rase.utils.DateUtils;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class CasMaladie  implements Serializable
     
     private String groupeAge; // {Moins_de_5 ,Plus_de_5 }
      
-    private String date;
+    private Date date;
     
     // the coordinates must be stored in the longitude, latitude order
     private List<Double> location;
@@ -76,7 +78,7 @@ public class CasMaladie  implements Serializable
         this.sexe = sexe ;
         this.groupeAge = groupeAge;
         
-        this.date = date;
+        this.date = DateUtils.getDate(DateUtils.getDateFormater(date, DateUtils.DB_FORMAT_DATE,DateUtils.DB_FORMAT_ISO_DATETIME),DateUtils.DB_FORMAT_ISO_DATETIME);
         this.location = location;
         this.note = note;
         this.nombreCas = nombreCas;
@@ -119,14 +121,14 @@ public class CasMaladie  implements Serializable
     }
 
 
-    public String getDate ()
+    public Date getDate ()
     {
-        return date;
+        return  this.date;// =DateUtils.getDateFormater(date, DateUtils.DB_FORMAT_DATE,DateUtils.DB_FORMAT_ISO_DATETIME),DateUtils.DB_FORMAT_ISO_DATETIME);
     }
 
-    public void setDate (String Date)
+    public void setDate (String date)
     {
-        this.date = Date;
+        this.date =  this.date = DateUtils.getDate(DateUtils.getDateFormater(date, DateUtils.DB_FORMAT_DATE,DateUtils.DB_FORMAT_ISO_DATETIME),DateUtils.DB_FORMAT_ISO_DATETIME);
     }
 
     public List<Double> getLocation() {

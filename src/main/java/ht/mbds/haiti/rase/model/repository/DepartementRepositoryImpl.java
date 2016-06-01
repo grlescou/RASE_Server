@@ -53,13 +53,13 @@ public class DepartementRepositoryImpl implements DepartementRepositoryCostum{
      @Autowired private MaladieRepository maladieRepo;
     
     @Override
-    public List<Departement> getDepartementDemographieCM(Long idMaldie){
+    public List<Departement> getDepartementDemographieCM(Long idMaldie, String dateDebut,String dateFin, String Mention, int note ){
     
       List<Departement> listDepartement= departementRepo.findAll();
       
       Maladie maladieRecherche = maladieRepo.findOne(idMaldie.toString());
     
-      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_Departement(idMaldie);
+      Map<String,CasMaladieMR> listCasMaladieMRs= casMaladieRepo.getCasMaladieMR_Departement(idMaldie,dateDebut,dateFin,Mention,note);
     
        Map<String,DemographieValue> listDemographieValueMRs= demographietRepo.getDemographieByDepartement();
     
