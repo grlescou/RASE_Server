@@ -40,7 +40,7 @@ public class CasMaladieRepositoryImpl implements CasMaladieRepositoryCostum {
       
        String queryString = "{ \"maladie._id\" : "+idMaldie.toString()+", \"date\": { $gte:\""+dDebut+"\", $lt: \""+dFin+"\" }";
       
-      if ( Mention.equals("")== false || Mention != null){
+      if ( Mention.equals("0")== false || Mention != null){
           queryString += ", \"mention.nom\": \""+ Mention+"\"";
       }
       
@@ -49,6 +49,7 @@ public class CasMaladieRepositoryImpl implements CasMaladieRepositoryCostum {
       }
       
       queryString += "}";
+      System.out.println("Querry String ="+queryString);
       
       BasicQuery query = new BasicQuery(queryString);
       

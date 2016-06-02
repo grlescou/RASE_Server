@@ -49,6 +49,15 @@ public class ParametreController {
         return parametre;
     }
     
+    
+     @RequestMapping(value="/{nom}/nom", method=RequestMethod.GET, produces={APPLICATION_JSON_VALUE})
+    public Parametre getParametreByNom(@PathVariable("nom") String nom) {     
+        Parametre parametre = parametreService.findParametreByNom(nom) ;
+        return parametre;
+    }
+    
+    
+    
    @RequestMapping(method=RequestMethod.POST, consumes={APPLICATION_JSON_VALUE})
     public Message createParametre(@Valid @RequestBody Parametre malaide) {
         Message<Parametre> message= null;
