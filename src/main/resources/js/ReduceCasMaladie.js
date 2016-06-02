@@ -33,7 +33,7 @@ function Reduce(key, values) {
                         outs.moins_5an += v.nombreCas;
                     }
  
-	outs.count += 1;  
+	outs.count += v.nombreCas;  
                 });
                 return outs;
             }

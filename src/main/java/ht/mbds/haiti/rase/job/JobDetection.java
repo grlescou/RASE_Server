@@ -164,7 +164,7 @@ public class JobDetection {
       
     }    
       
-//@Scheduled(fixedRate=200)      
+@Scheduled(fixedRate=200)      
 public void Limitaleur() {
     System.out.println("===================Nouveau cas Maladie en cours===================");
        Random random;   
@@ -315,7 +315,7 @@ public void Limitaleur() {
              System.out.println("message d'erreur :"+ ex.getLocalizedMessage());
        }
     
-    
+       
     
     
      
